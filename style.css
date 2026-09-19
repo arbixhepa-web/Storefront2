@@ -1,12 +1,15 @@
-/* External CSS */
+/* ================================= */
 /* General Page Styling */
+/* ================================= */
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     background-color: #312e81;
     color: white;
 }
+/* ================================= */
 /* Header */
+/* ================================= */
 header {
     background-color: #1f2937;
     text-align: center;
@@ -19,13 +22,16 @@ header {
 header p {
     font-size: 18px;
 }
+/* ================================= */
 /* Navigation */
+/* ================================= */
 nav {
     background-color: #374151;
     display: flex;
     justify-content: center;
     gap: 35px;
     padding: 15px;
+    flex-wrap: wrap;
 }
 nav a {
     color: white;
@@ -35,11 +41,15 @@ nav a {
 nav a:hover {
     text-decoration: underline;
 }
+/* ================================= */
 /* Main Content */
+/* ================================= */
 main {
     padding: 30px;
 }
+/* ================================= */
 /* Announcement */
+/* ================================= */
 .announcement {
     background-color: #2563eb;
     padding: 20px;
@@ -47,12 +57,15 @@ main {
     border-radius: 10px;
     margin-bottom: 30px;
 }
+/* ================================= */
 /* Products */
+/* ================================= */
 .products {
     display: flex;
     justify-content: center;
     gap: 25px;
     flex-wrap: wrap;
+    margin-bottom: 50px;
 }
 .product-card {
     background-color: #1f2937;
@@ -62,10 +75,6 @@ main {
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
-.product-card img {
-    width: 100%;
-    border-radius: 8px;
-}
 .product-card h2 {
     margin-top: 15px;
 }
@@ -73,7 +82,9 @@ main {
     color: #d1d5db;
     line-height: 1.5;
 }
+/* ================================= */
 /* Buttons */
+/* ================================= */
 button {
     background-color: #2563eb;
     color: white;
@@ -86,7 +97,9 @@ button {
 button:hover {
     background-color: #1d4ed8;
 }
+/* ================================= */
 /* About Section */
+/* ================================= */
 .about {
     max-width: 900px;
     margin: 50px auto;
@@ -128,6 +141,7 @@ button:hover {
     background-color: #374151;
     color: white;
     border-color: #2563eb;
+    color: white;
     box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.25);
 }
 .signup-card .btn {
@@ -140,7 +154,9 @@ button:hover {
 .signup-card .btn:hover {
     background-color: #1d4ed8;
 }
+/* ================================= */
 /* Footer */
+/* ================================= */
 footer {
     background-color: #030712;
     text-align: center;
@@ -150,4 +166,30 @@ footer {
 footer p {
     margin: 5px;
     color: #9ca3af;
+}
+/* ================================= */
+/* Mobile Support */
+/* ================================= */
+@media (max-width: 600px) {
+    nav {
+        gap: 15px;
+    }
+    nav a {
+        font-size: 14px;
+    }
+    .logo {
+        font-size: 30px;
+    }
+    main {
+        padding: 15px;
+    }
+    .product-card {
+        width: 100%;
+    }
+    .signup-container {
+        margin: 25px auto;
+    }
+    .signup-card {
+        padding: 20px;
+    }
 }
