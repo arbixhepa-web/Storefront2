@@ -1,30 +1,22 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>GameZone - Sign Up</title>
-
     <!-- Bootstrap CSS -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
-
     <!-- External CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
     <!-- Header -->
     <header>
         <div class="logo">🎮 GameZone</div>
         <p>Your Ultimate Gaming Store</p>
     </header>
-
-
     <!-- Navigation -->
     <nav>
         <a href="storefront.html">Home</a>
@@ -33,26 +25,17 @@
         <a href="storefront.html#about">About</a>
         <a href="signup.html">Sign Up</a>
     </nav>
-
-
     <!-- Main Content -->
     <main>
-
         <div class="signup-container">
-
             <div class="signup-card">
-
                 <h2>Create Your GameZone Account</h2>
-
                 <form id="signupForm">
-
                     <!-- Username -->
                     <div class="mb-3">
-
                         <label for="username" class="form-label">
                             Username
                         </label>
-
                         <input
                             type="text"
                             class="form-control"
@@ -61,22 +44,16 @@
                             placeholder="Enter username"
                             onfocusout="validate(this)"
                             required>
-
                         <small
                             id="usernameError"
                             class="error-message">
                         </small>
-
                     </div>
-
-
                     <!-- Email -->
                     <div class="mb-3">
-
                         <label for="email" class="form-label">
                             Email
                         </label>
-
                         <input
                             type="email"
                             class="form-control"
@@ -85,22 +62,16 @@
                             placeholder="joe@test.com"
                             onfocusout="validate(this)"
                             required>
-
                         <small
                             id="emailError"
                             class="error-message">
                         </small>
-
                     </div>
-
-
                     <!-- Password -->
                     <div class="mb-3">
-
                         <label for="password" class="form-label">
                             Password
                         </label>
-
                         <input
                             type="password"
                             class="form-control"
@@ -109,22 +80,16 @@
                             placeholder="Enter password"
                             onfocusout="validate(this)"
                             required>
-
                         <small
                             id="passwordError"
                             class="error-message">
                         </small>
-
                     </div>
-
-
                     <!-- Confirm Password -->
                     <div class="mb-3">
-
                         <label for="confirmPassword" class="form-label">
                             Confirm Password
                         </label>
-
                         <input
                             type="password"
                             class="form-control"
@@ -133,23 +98,66 @@
                             placeholder="Confirm password"
                             onfocusout="validate(this)"
                             required>
-
                         <small
                             id="confirmPasswordError"
                             class="error-message">
                         </small>
-
                     </div>
-
-
                     <!-- Submit Button -->
                     <div class="d-grid">
-
                         <button
                             type="submit"
                             class="btn">
-
                             Create Account
-
                         </button>
-```
+                    </div>
+                    <!-- JSON Output -->
+                    <div class="mt-4">
+                        <h5>Submitted Form Data</h5>
+                        <pre id="jsonOutput"></pre>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+    <!-- JavaScript -->
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            // Prevent the page from refreshing
+            event.preventDefault();
+            // Capture all form field values
+            const formData = new FormData(this);
+            // Create JSON object
+            const jsonObject = {};
+            formData.forEach((value, key) => {
+                jsonObject[key] = value;
+            });
+            // Display JSON object below the submit button
+            document.getElementById("jsonOutput").textContent =
+                JSON.stringify(jsonObject, null, 2);
+        });
+    </script>
+</body>
+</html>
+
+What you need to do
+
+1. Open your signup.html.
+2. Replace your current code with the code above.
+3. Save it.
+4. Open the page in your browser.
+5. Enter values into all four fields.
+6. Click Create Account.
+7. The JSON object should appear under the button.
+
+Your assignment requirement is now handled by:
+
+const formData = new FormData(this);
+const jsonObject = {};
+formData.forEach((value, key) => {
+    jsonObject[key] = value;
+});
+document.getElementById("jsonOutput").textContent =
+    JSON.stringify(jsonObject, null, 2);
+
+This captures the value of each form field and converts the collection into a JSON object.
