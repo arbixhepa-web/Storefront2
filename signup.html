@@ -30,7 +30,6 @@
         <div class="signup-container">
             <div class="signup-card">
                 <h2>Create Your GameZone Account</h2>
-                <!-- Sign Up Form -->
                 <form id="signupForm">
                     <!-- Username -->
                     <div class="mb-3">
@@ -124,22 +123,21 @@
     <!-- JavaScript -->
     <script>
         document.getElementById("signupForm").addEventListener("submit", function(event) {
-            // Stop the form from refreshing the page
+            // Prevent page refresh
             event.preventDefault();
             // Get the form
             const form = event.target;
-            // Create JSON object using each form field value
+            // Create JSON object from form values
             const jsonObject = {
                 username: form.username.value,
                 email: form.email.value,
                 password: form.password.value,
                 confirmPassword: form.confirmPassword.value
             };
-            // Display the JSON object below the submit button
+            // Display JSON below the submit button
             document.getElementById("jsonOutput").textContent =
                 JSON.stringify(jsonObject, null, 2);
         });
     </script>
 </body>
 </html>
-
