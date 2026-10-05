@@ -30,6 +30,7 @@
         <div class="signup-container">
             <div class="signup-card">
                 <h2>Create Your GameZone Account</h2>
+                <!-- Sign Up Form -->
                 <form id="signupForm">
                     <!-- Username -->
                     <div class="mb-3">
@@ -123,16 +124,18 @@
     <!-- JavaScript -->
     <script>
         document.getElementById("signupForm").addEventListener("submit", function(event) {
-            // Prevent the page from refreshing
+            // Stop the form from refreshing the page
             event.preventDefault();
-            // Capture all form field values
-            const formData = new FormData(this);
-            // Create JSON object
-            const jsonObject = {};
-            formData.forEach((value, key) => {
-                jsonObject[key] = value;
-            });
-            // Display JSON object below the submit button
+            // Get the form
+            const form = event.target;
+            // Create JSON object using each form field value
+            const jsonObject = {
+                username: form.username.value,
+                email: form.email.value,
+                password: form.password.value,
+                confirmPassword: form.confirmPassword.value
+            };
+            // Display the JSON object below the submit button
             document.getElementById("jsonOutput").textContent =
                 JSON.stringify(jsonObject, null, 2);
         });
@@ -140,24 +143,3 @@
 </body>
 </html>
 
-What you need to do
-
-1. Open your signup.html.
-2. Replace your current code with the code above.
-3. Save it.
-4. Open the page in your browser.
-5. Enter values into all four fields.
-6. Click Create Account.
-7. The JSON object should appear under the button.
-
-Your assignment requirement is now handled by:
-
-const formData = new FormData(this);
-const jsonObject = {};
-formData.forEach((value, key) => {
-    jsonObject[key] = value;
-});
-document.getElementById("jsonOutput").textContent =
-    JSON.stringify(jsonObject, null, 2);
-
-This captures the value of each form field and converts the collection into a JSON object.
