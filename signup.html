@@ -1,142 +1,97 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameZone - Sign Up</title>
-    <!-- Bootstrap CSS -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
-    <!-- External CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header -->
+    <!-- Signup HTML: [Team Member Name] -->
     <header>
         <div class="logo">🎮 GameZone</div>
         <p>Your Ultimate Gaming Store</p>
     </header>
-    <!-- Navigation -->
+
     <nav>
         <a href="storefront.html">Home</a>
         <a href="storefront.html#games">Games</a>
         <a href="storefront.html#accessories">Accessories</a>
         <a href="storefront.html#about">About</a>
         <a href="signup.html">Sign Up</a>
+        <a href="product.html">Product Management</a>
     </nav>
-    <!-- Main Content -->
+
     <main>
         <div class="signup-container">
             <div class="signup-card">
                 <h2>Create Your GameZone Account</h2>
+
                 <form id="signupForm">
-                    <!-- Username -->
                     <div class="mb-3">
-                        <label for="username" class="form-label">
-                            Username
-                        </label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            id="username"
-                            name="username"
-                            placeholder="Enter username"
-                            onfocusout="validate(this)"
-                            required>
-                        <small
-                            id="usernameError"
-                            class="error-message">
-                        </small>
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required maxlength="50">
                     </div>
-                    <!-- Email -->
+
                     <div class="mb-3">
-                        <label for="email" class="form-label">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            class="form-control"
-                            id="email"
-                            name="email"
-                            placeholder="joe@test.com"
-                            onfocusout="validate(this)"
-                            required>
-                        <small
-                            id="emailError"
-                            class="error-message">
-                        </small>
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="joe@test.com" required>
                     </div>
-                    <!-- Password -->
+
                     <div class="mb-3">
-                        <label for="password" class="form-label">
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            class="form-control"
-                            id="password"
-                            name="password"
-                            placeholder="Enter password"
-                            onfocusout="validate(this)"
-                            required>
-                        <small
-                            id="passwordError"
-                            class="error-message">
-                        </small>
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" minlength="8" required autocomplete="new-password">
                     </div>
-                    <!-- Confirm Password -->
+
                     <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">
-                            Confirm Password
-                        </label>
-                        <input
-                            type="password"
-                            class="form-control"
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            placeholder="Confirm password"
-                            onfocusout="validate(this)"
-                            required>
-                        <small
-                            id="confirmPasswordError"
-                            class="error-message">
-                        </small>
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" minlength="8" required autocomplete="new-password">
                     </div>
-                    <!-- Submit Button -->
-                    <div class="d-grid">
-                        <button
-                            type="submit"
-                            class="btn">
-                            Create Account
-                        </button>
-                    </div>
-                    <!-- JSON Output -->
-                    <div class="mt-4">
-                        <h5>Submitted Form Data</h5>
-                        <pre id="jsonOutput"></pre>
+
+                    <div id="signupStatus" class="product-status" role="status"></div>
+
+                    <div class="d-grid mt-3">
+                        <button type="submit" class="btn">Create Account</button>
                     </div>
                 </form>
+
+                <div class="product-json-output">
+                    <h2>Submitted Form Data</h2>
+                    <pre id="signupJson">No form submitted yet.</pre>
+                </div>
             </div>
         </div>
     </main>
-    <!-- JavaScript -->
+
+    <!-- Signup validation and JSON: [Team Member Name] -->
     <script>
-        document.getElementById("signupForm").addEventListener("submit", function(event) {
-            // Prevent page refresh
+        document.getElementById("signupForm").addEventListener("submit", function (event) {
             event.preventDefault();
-            // Get the form
-            const form = event.target;
-            // Create JSON object from form values
-            const jsonObject = {
-                username: form.username.value,
-                email: form.email.value,
-                password: form.password.value,
-                confirmPassword: form.confirmPassword.value
+
+            const username = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+            const status = document.getElementById("signupStatus");
+
+            if (password !== confirmPassword) {
+                status.textContent = "Passwords do not match.";
+                status.style.color = "#fca5a5";
+                return;
+            }
+
+            const submittedData = {
+                username: username,
+                email: email
             };
-            // Display JSON below the submit button
-            document.getElementById("jsonOutput").textContent =
-                JSON.stringify(jsonObject, null, 2);
+
+            document.getElementById("signupJson").textContent =
+                JSON.stringify(submittedData, null, 2);
+
+            status.textContent = "Form validated. No account has been created on a server.";
+            status.style.color = "#86efac";
         });
     </script>
 </body>
