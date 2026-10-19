@@ -1,4 +1,4 @@
-```css
+
 /* ================================= */
 /* General Page Styling */
 /* ================================= */
@@ -9,7 +9,6 @@ body {
     background-color: #312e81;
     color: white;
 }
-
 
 /* ================================= */
 /* Header */
@@ -29,7 +28,6 @@ header {
 header p {
     font-size: 18px;
 }
-
 
 /* ================================= */
 /* Navigation */
@@ -52,8 +50,8 @@ nav a {
 
 nav a:hover {
     text-decoration: underline;
+    color: #93c5fd;
 }
-
 
 /* ================================= */
 /* Main Content */
@@ -62,7 +60,6 @@ nav a:hover {
 main {
     padding: 30px;
 }
-
 
 /* ================================= */
 /* Announcement */
@@ -76,7 +73,6 @@ main {
     margin-bottom: 30px;
 }
 
-
 /* ================================= */
 /* Section Headings */
 /* ================================= */
@@ -85,7 +81,6 @@ main h1 {
     text-align: center;
     margin-bottom: 30px;
 }
-
 
 /* ================================= */
 /* Products */
@@ -114,5 +109,168 @@ main h1 {
 
 .product-card p {
     color: #d1d5db;
-    line-height:
-```
+    line-height: 1.6;
+}
+
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ================================= */
+/* About Section */
+/* ================================= */
+
+#about {
+    text-align: center;
+    padding: 30px 0;
+}
+
+/* ================================= */
+/* Sign Up Page */
+/* ================================= */
+
+.signup-container {
+    max-width: 600px;
+    margin: 30px auto;
+}
+
+.signup-card {
+    background-color: #1f2937;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.signup-card h2 {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.signup-card .form-label {
+    font-weight: bold;
+}
+
+.signup-card .btn {
+    background-color: #2563eb;
+    color: white;
+    font-weight: bold;
+}
+
+.signup-card .btn:hover {
+    background-color: #1d4ed8;
+}
+
+.error-message {
+    color: #fca5a5;
+}
+
+/* ================================= */
+/* Product Management Page */
+/* ================================= */
+
+/* HTML and CSS: [Replace with team member name] */
+
+.product-management-container {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 30px;
+    background-color: #1f2937;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.product-management-container h1 {
+    color: white;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.product-management-container .intro {
+    color: #d1d5db;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.product-management-container .form-label {
+    color: white;
+    font-weight: bold;
+}
+
+.product-management-container .form-control,
+.product-management-container .form-select {
+    background-color: #f9fafb;
+    color: #111827;
+    border: 1px solid #9ca3af;
+}
+
+.product-management-container .form-control:focus,
+.product-management-container .form-select:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.3);
+}
+
+.product-management-container .btn-primary {
+    background-color: #2563eb;
+    border-color: #2563eb;
+    font-weight: bold;
+}
+
+.product-management-container .btn-primary:hover {
+    background-color: #1d4ed8;
+}
+
+.product-management-container .btn-outline-light {
+    font-weight: bold;
+}
+
+.product-json-output {
+    margin-top: 25px;
+}
+
+.product-json-output h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.product-json-output pre {
+    background-color: #111827;
+    color: #93c5fd;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    padding: 20px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    min-height: 80px;
+}
+
+.product-status {
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* ================================= */
+/* Responsive Layout */
+/* ================================= */
+
+@media (max-width: 600px) {
+    main {
+        padding: 15px;
+    }
+
+    .product-management-container,
+    .signup-card {
+        padding: 20px;
+        margin: 15px auto;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 30px;
+    }
+}
