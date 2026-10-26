@@ -6,219 +6,293 @@
 
     <title>GameZone - Shopping Cart</title>
 
-    <!-- Bootstrap CSS: Team Member 1 -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
-
-    <!-- Project stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Team Member: Update with your name -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <!-- Shopping cart page styles: Team Member 1 -->
+    <!-- GameZone Shopping Cart Styles -->
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            background: #0b1120;
-            color: #f9fafb;
+            margin: 0 !important;
+            background-color: #0b1120 !important;
+            color: #f9fafb !important;
             font-family: Arial, sans-serif;
-            margin: 0;
         }
 
         header {
-            background: #111827;
-            padding: 25px 15px;
+            background-color: #111827 !important;
+            color: #ffffff !important;
             text-align: center;
-            border-bottom: 2px solid #2563eb;
+            padding: 25px 15px;
+            border-bottom: 3px solid #2563eb;
         }
 
         header h1 {
-            color: #60a5fa;
-            font-size: 2.2rem;
+            color: #60a5fa !important;
+            font-size: 36px;
             font-weight: bold;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
 
         header p {
-            color: #d1d5db;
+            color: #e5e7eb !important;
             margin: 0;
         }
 
         nav {
-            background: #1f2937;
-            padding: 15px;
+            background-color: #1e293b !important;
+            padding: 16px;
             text-align: center;
         }
 
         nav a {
+            display: inline-block;
             margin: 4px;
+            text-decoration: none;
         }
 
         .page-container {
+            width: 92%;
             max-width: 1150px;
             margin: 30px auto;
             padding: 25px;
-            background: #111827;
+            background-color: #111827 !important;
+            color: #f9fafb !important;
             border: 1px solid #374151;
             border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
-        .section-title {
-            color: #60a5fa;
-            font-size: 1.5rem;
+        .main-title {
+            text-align: center;
+            color: #60a5fa !important;
+            font-size: 30px;
             font-weight: bold;
-            margin-bottom: 18px;
+            margin-bottom: 12px;
         }
 
         .intro {
-            color: #d1d5db;
+            color: #d1d5db !important;
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
-        .form-control,
-        .form-select {
-            background: #f9fafb;
-            color: #111827;
+        .section-title {
+            color: #60a5fa !important;
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 16px;
         }
 
-        .form-control:focus,
-        .form-select:focus {
-            border-color: #60a5fa;
-            box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+        label {
+            color: #f9fafb !important;
+        }
+
+        .form-control {
+            background-color: #ffffff !important;
+            color: #111827 !important;
+            border: 1px solid #9ca3af !important;
+            min-height: 42px;
+        }
+
+        .form-control:focus {
+            border-color: #60a5fa !important;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25) !important;
         }
 
         .btn {
-            border-radius: 6px;
-            font-weight: bold;
-            transition: 0.2s;
+            border-radius: 6px !important;
+            font-weight: bold !important;
+            padding: 9px 14px;
+            transition: background-color 0.2s ease;
         }
 
         .btn-primary {
-            background: #2563eb;
-            border-color: #2563eb;
+            background-color: #2563eb !important;
+            border-color: #2563eb !important;
+            color: #ffffff !important;
         }
 
         .btn-primary:hover {
-            background: #1d4ed8;
+            background-color: #1d4ed8 !important;
         }
 
         .btn-success {
-            background: #059669;
-            border-color: #059669;
+            background-color: #059669 !important;
+            border-color: #059669 !important;
+            color: #ffffff !important;
         }
 
         .btn-success:hover {
-            background: #047857;
+            background-color: #047857 !important;
         }
 
         .btn-danger {
-            background: #dc2626;
-            border-color: #dc2626;
+            background-color: #dc2626 !important;
+            border-color: #dc2626 !important;
+            color: #ffffff !important;
         }
 
         .btn-danger:hover {
-            background: #b91c1c;
+            background-color: #b91c1c !important;
         }
 
-        .table-responsive {
-            border-radius: 8px;
-            overflow: hidden;
+        .btn-secondary {
+            background-color: #4b5563 !important;
+            border-color: #4b5563 !important;
+            color: #ffffff !important;
+        }
+
+        .btn-secondary:hover {
+            background-color: #374151 !important;
+        }
+
+        .btn-outline-light {
+            color: #ffffff !important;
+            border-color: #9ca3af !important;
+        }
+
+        .btn-outline-light:hover {
+            background-color: #2563eb !important;
+            color: #ffffff !important;
         }
 
         .cart-table {
+            width: 100%;
             margin-bottom: 0;
+            border-collapse: collapse;
             vertical-align: middle;
         }
 
         .cart-table thead th {
-            background: #1f2937;
-            color: #93c5fd;
+            background-color: #1d4ed8 !important;
+            color: #ffffff !important;
             padding: 14px;
+            border: 1px solid #3b82f6 !important;
             white-space: nowrap;
         }
 
         .cart-table tbody td {
-            background: #172033;
-            color: #f9fafb;
+            background-color: #172033 !important;
+            color: #ffffff !important;
             padding: 12px;
+            border: 1px solid #374151 !important;
+            vertical-align: middle;
+        }
+
+        .cart-table tbody tr:nth-child(even) td {
+            background-color: #202c42 !important;
         }
 
         .cart-table tbody tr:hover td {
-            background: #202c42;
+            background-color: #293a55 !important;
         }
 
         .cart-table .form-control {
-            min-width: 75px;
+            min-width: 70px;
             max-width: 100px;
         }
 
         .empty-message {
+            color: #d1d5db !important;
             text-align: center;
             padding: 25px !important;
-            color: #d1d5db !important;
         }
 
         .status-message {
-            margin-top: 12px;
             min-height: 22px;
+            margin-top: 12px;
             font-weight: bold;
         }
 
         .cart-summary {
-            background: #1f2937;
+            background-color: #1e293b !important;
+            color: #ffffff !important;
+            border: 1px solid #3b82f6;
+            border-radius: 8px;
             padding: 20px;
             margin-top: 20px;
-            border-radius: 8px;
             text-align: right;
-            border: 1px solid #374151;
         }
 
         .cart-summary h3 {
-            color: #60a5fa;
+            color: #60a5fa !important;
             margin: 0;
+            font-size: 24px;
         }
 
         .action-buttons {
             display: flex;
-            gap: 10px;
             flex-wrap: wrap;
+            gap: 10px;
             margin-top: 20px;
         }
 
-        #jsonOutput {
-            background: #080d18;
-            color: #93c5fd;
-            border: 1px solid #374151;
-            border-radius: 8px;
-            padding: 18px;
-            min-height: 100px;
-            white-space: pre-wrap;
-            overflow-wrap: anywhere;
+        .page-divider {
+            border: 0;
+            border-top: 2px solid #374151;
+            margin: 30px 0;
+            opacity: 1;
         }
 
-        .page-divider {
-            border-color: #374151;
-            margin: 30px 0;
+        .json-description {
+            color: #d1d5db !important;
+        }
+
+        #jsonOutput {
+            display: block;
+            width: 100%;
+            min-height: 120px;
+            padding: 18px;
+            margin-top: 12px;
+            background-color: #050a14 !important;
+            color: #93c5fd !important;
+            border: 1px solid #3b82f6 !important;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            font-family: monospace;
+            font-size: 14px;
         }
 
         footer {
-            background: #111827;
-            color: #9ca3af;
+            background-color: #111827 !important;
+            color: #9ca3af !important;
             text-align: center;
-            padding: 20px;
+            padding: 22px;
             margin-top: 30px;
+            border-top: 2px solid #2563eb;
         }
 
-        @media (max-width: 600px) {
+        footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 700px) {
             .page-container {
-                margin: 15px;
-                padding: 15px;
+                width: 96%;
+                padding: 14px;
+                margin: 15px auto;
             }
 
             header h1 {
-                font-size: 1.8rem;
+                font-size: 28px;
+            }
+
+            .main-title {
+                font-size: 25px;
+            }
+
+            .section-title {
+                font-size: 20px;
             }
 
             .cart-summary {
@@ -228,19 +302,29 @@
             .action-buttons .btn {
                 width: 100%;
             }
+
+            .input-group {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            .input-group .form-control {
+                width: 100%;
+                border-radius: 6px !important;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Header section: Team Member 1 -->
+    <!-- Header: Team Member Name -->
     <header>
         <h1>🎮 GameZone</h1>
         <p>Your Ultimate Gaming Store</p>
     </header>
 
-    <!-- Navigation section: Team Member 1 -->
+    <!-- Navigation: Team Member Name -->
     <nav>
         <a href="storefront.html" class="btn btn-outline-light">Home</a>
         <a href="storefront.html#games" class="btn btn-outline-light">Games</a>
@@ -259,13 +343,13 @@
 
     <main class="page-container">
 
-        <h2 class="text-center mb-3">Shopping Cart</h2>
+        <h2 class="main-title">Shopping Cart</h2>
 
         <p class="intro">
-            Search for your favorite gaming products and add them to your cart.
+            Search for gaming products, add items to your cart, and view your total.
         </p>
 
-        <!-- Product search section: Team Member 1 -->
+        <!-- Product search: Team Member Name -->
         <section class="mb-4">
             <h3 class="section-title">Search Products</h3>
 
@@ -274,7 +358,7 @@
                     type="search"
                     id="searchInput"
                     class="form-control"
-                    placeholder="Search by product ID, name, or category"
+                    placeholder="Enter product ID, name, or category"
                     aria-label="Search products">
 
                 <button
@@ -292,19 +376,15 @@
                 </button>
             </div>
 
-            <div
-                id="searchStatus"
-                class="status-message"
-                role="status">
-            </div>
+            <div id="searchStatus" class="status-message" role="status"></div>
         </section>
 
-        <!-- Product catalog section: Team Member 1 -->
+        <!-- Product catalog: Team Member Name -->
         <section>
             <h3 class="section-title">Available Products</h3>
 
             <div class="table-responsive">
-                <table class="table table-bordered cart-table">
+                <table class="table cart-table">
                     <thead>
                         <tr>
                             <th>Product ID</th>
@@ -314,7 +394,6 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-
                     <tbody id="productList"></tbody>
                 </table>
             </div>
@@ -322,12 +401,12 @@
 
         <hr class="page-divider">
 
-        <!-- Shopping cart section: Team Member 1 -->
+        <!-- Shopping cart: Team Member Name -->
         <section>
             <h3 class="section-title">Your Shopping Cart</h3>
 
             <div class="table-responsive">
-                <table class="table table-bordered cart-table">
+                <table class="table cart-table">
                     <thead>
                         <tr>
                             <th>Product ID</th>
@@ -338,50 +417,37 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-
                     <tbody id="cartList"></tbody>
                 </table>
             </div>
 
             <div class="cart-summary">
                 <h3>
-                    Cart Total:
-                    <span id="cartTotal">$0.00</span>
+                    Cart Total: <span id="cartTotal">$0.00</span>
                 </h3>
             </div>
 
             <div class="action-buttons">
-                <button
-                    type="button"
-                    id="submitCart"
-                    class="btn btn-primary">
+                <button type="button" id="submitCart" class="btn btn-primary">
                     Submit Cart / Display JSON
                 </button>
 
-                <button
-                    type="button"
-                    id="clearCart"
-                    class="btn btn-danger">
+                <button type="button" id="clearCart" class="btn btn-danger">
                     Clear Cart
                 </button>
             </div>
 
-            <div
-                id="cartStatus"
-                class="status-message"
-                role="status">
-            </div>
+            <div id="cartStatus" class="status-message" role="status"></div>
         </section>
 
-        <!-- JSON output section: Team Member 1 -->
         <hr class="page-divider">
 
+        <!-- JSON document: Team Member Name -->
         <section>
             <h3 class="section-title">Shopping Cart JSON Document</h3>
 
-            <p>
-                Submit your cart to display the shopping cart information
-                in JSON format.
+            <p class="json-description">
+                Click the submit button to display your cart as a JSON document.
             </p>
 
             <pre id="jsonOutput">No cart submitted yet.</pre>
@@ -393,87 +459,68 @@
         <p>&copy; 2026 GameZone. All rights reserved.</p>
     </footer>
 
-    <!--
-        Team Member 1:
-        Product search, cart management, quantity updates,
-        total calculation, and JSON document generation.
-    -->
-
+    <!-- JavaScript: Team Member Name -->
     <script>
         $(document).ready(function () {
 
             const PRODUCTS_KEY = "gameZoneProducts";
             const CART_KEY = "gameZoneCart";
 
-            // Sample products for testing the shopping cart.
-            // The page uses products saved by product.html when available.
+            // Sample products used if no product catalog has been saved.
             const sampleProducts = [
                 {
                     productId: "G001",
                     productDescription: "Adventure Game",
                     productCategory: "Video Games",
-                    productUnitOfMeasure: "Each",
-                    productPrice: 59.99,
-                    productWeight: null
+                    productPrice: 59.99
                 },
                 {
                     productId: "G002",
                     productDescription: "Action Game",
                     productCategory: "Video Games",
-                    productUnitOfMeasure: "Each",
-                    productPrice: 49.99,
-                    productWeight: null
+                    productPrice: 49.99
                 },
                 {
                     productId: "G003",
                     productDescription: "Racing Game",
                     productCategory: "Video Games",
-                    productUnitOfMeasure: "Each",
-                    productPrice: 39.99,
-                    productWeight: null
+                    productPrice: 39.99
                 },
                 {
                     productId: "A001",
                     productDescription: "Gaming Headset",
                     productCategory: "Accessories",
-                    productUnitOfMeasure: "Each",
-                    productPrice: 79.99,
-                    productWeight: null
+                    productPrice: 79.99
                 },
                 {
                     productId: "A002",
                     productDescription: "Wireless Controller",
                     productCategory: "Accessories",
-                    productUnitOfMeasure: "Each",
-                    productPrice: 64.99,
-                    productWeight: null
+                    productPrice: 64.99
                 },
                 {
                     productId: "A003",
                     productDescription: "Gaming Keyboard",
                     productCategory: "Accessories",
-                    productUnitOfMeasure: "Each",
-                    productPrice: 89.99,
-                    productWeight: null
+                    productPrice: 89.99
                 }
             ];
 
-            // Read saved information from localStorage.
+            // Safely load saved browser data.
             function readJSON(key, defaultValue) {
                 try {
-                    const savedValue = localStorage.getItem(key);
+                    const value = localStorage.getItem(key);
 
-                    if (savedValue === null) {
+                    if (value === null) {
                         return defaultValue;
                     }
 
-                    return JSON.parse(savedValue);
+                    return JSON.parse(value);
                 } catch (error) {
                     return defaultValue;
                 }
             }
 
-            // Get product information from different possible field names.
             function getProductId(product) {
                 return String(
                     product.productId ?? product.id ?? ""
@@ -505,40 +552,39 @@
                 );
             }
 
-            // Convert the saved product data into an array.
+            // Convert saved products into an array.
             function normalizeProducts(data) {
-                let productArray = [];
+                let list = [];
 
                 if (Array.isArray(data)) {
-                    productArray = data;
+                    list = data;
                 } else if (data && typeof data === "object") {
-                    productArray = Object.values(data);
+                    list = Object.values(data);
                 }
 
-                return productArray.filter(function (product) {
+                return list.filter(function (product) {
                     return product &&
                         getProductId(product) !== "" &&
                         getProductName(product) !== "";
                 });
             }
 
-            // Load saved products or use the sample catalog.
+            // Load products. Fall back to sample products if needed.
             const savedProducts = readJSON(PRODUCTS_KEY, null);
-
             let products = normalizeProducts(savedProducts);
 
             if (products.length === 0) {
                 products = sampleProducts;
             }
 
-            // Load saved shopping cart information.
+            // Load saved cart items.
             let cart = readJSON(CART_KEY, []);
 
             if (!Array.isArray(cart)) {
                 cart = [];
             }
 
-            // Validate and clean saved cart items.
+            // Remove invalid saved cart items.
             cart = cart.filter(function (item) {
                 return item &&
                     typeof item.productId === "string" &&
@@ -556,7 +602,6 @@
                 };
             });
 
-            // Format prices as US dollars.
             function formatPrice(price) {
                 return Number(price).toLocaleString("en-US", {
                     style: "currency",
@@ -564,7 +609,6 @@
                 });
             }
 
-            // Save the shopping cart.
             function saveCart() {
                 try {
                     localStorage.setItem(
@@ -573,13 +617,12 @@
                     );
                 } catch (error) {
                     showCartStatus(
-                        "Could not save the cart in this browser.",
+                        "The browser could not save your cart.",
                         false
                     );
                 }
             }
 
-            // Display feedback messages.
             function showCartStatus(message, success) {
                 $("#cartStatus")
                     .text(message)
@@ -592,34 +635,31 @@
                     .css("color", success ? "#86efac" : "#fca5a5");
             }
 
-            // Clear old JSON when the cart changes.
             function resetJSONOutput() {
                 $("#jsonOutput").text(
                     "Your cart changed. Submit the cart to generate updated JSON."
                 );
             }
 
-            // Display products in the available products table.
-            function displayProducts(productArray) {
+            // Display available products.
+            function displayProducts(list) {
                 const tbody = $("#productList");
-
                 tbody.empty();
 
-                if (productArray.length === 0) {
-                    const row = $("<tr>");
-
-                    row.append(
-                        $("<td>", {
-                            colspan: 5,
-                            class: "empty-message"
-                        }).text("No products found.")
+                if (list.length === 0) {
+                    tbody.append(
+                        $("<tr>").append(
+                            $("<td>", {
+                                colspan: 5,
+                                class: "empty-message"
+                            }).text("No products found.")
+                        )
                     );
 
-                    tbody.append(row);
                     return;
                 }
 
-                productArray.forEach(function (product) {
+                list.forEach(function (product) {
                     const id = getProductId(product);
                     const name = getProductName(product);
                     const category = getProductCategory(product);
@@ -641,21 +681,18 @@
 
                     const addButton = $("<button>", {
                         type: "button",
-                        class: "btn btn-success btn-sm",
+                        class: "btn btn-success btn-sm add-to-cart",
                         text: "Add to Cart"
                     }).attr("data-product-id", id);
 
-                    row.append(
-                        $("<td>").append(addButton)
-                    );
-
+                    row.append($("<td>").append(addButton));
                     tbody.append(row);
                 });
             }
 
-            // Search by product ID, product name, or category.
+            // Search products by ID, name, or category.
             function searchProducts() {
-                const searchText = $("#searchInput")
+                const query = $("#searchInput")
                     .val()
                     .trim()
                     .toLowerCase();
@@ -666,7 +703,7 @@
                         getProductName(product),
                         getProductCategory(product)
                     ].some(function (value) {
-                        return value.toLowerCase().includes(searchText);
+                        return value.toLowerCase().includes(query);
                     });
                 });
 
@@ -681,42 +718,30 @@
             // Display cart items and calculate the total.
             function displayCart() {
                 const tbody = $("#cartList");
-
                 tbody.empty();
 
                 let total = 0;
 
                 if (cart.length === 0) {
-                    const row = $("<tr>");
-
-                    row.append(
-                        $("<td>", {
-                            colspan: 6,
-                            class: "empty-message"
-                        }).text("Your shopping cart is empty.")
+                    tbody.append(
+                        $("<tr>").append(
+                            $("<td>", {
+                                colspan: 6,
+                                class: "empty-message"
+                            }).text("Your shopping cart is empty.")
+                        )
                     );
-
-                    tbody.append(row);
                 }
 
                 cart.forEach(function (item) {
                     const subtotal = item.price * item.quantity;
-
                     total += subtotal;
 
                     const row = $("<tr>");
 
-                    row.append(
-                        $("<td>").text(item.productId)
-                    );
-
-                    row.append(
-                        $("<td>").text(item.productName)
-                    );
-
-                    row.append(
-                        $("<td>").text(formatPrice(item.price))
-                    );
+                    row.append($("<td>").text(item.productId));
+                    row.append($("<td>").text(item.productName));
+                    row.append($("<td>").text(formatPrice(item.price)));
 
                     const quantityInput = $("<input>", {
                         type: "number",
@@ -728,35 +753,25 @@
                         "aria-label": "Quantity for " + item.productName
                     }).attr("data-product-id", item.productId);
 
-                    row.append(
-                        $("<td>").append(quantityInput)
-                    );
-
-                    row.append(
-                        $("<td>").text(formatPrice(subtotal))
-                    );
+                    row.append($("<td>").append(quantityInput));
+                    row.append($("<td>").text(formatPrice(subtotal)));
 
                     const removeButton = $("<button>", {
                         type: "button",
-                        class: "btn btn-danger btn-sm",
+                        class: "btn btn-danger btn-sm remove-from-cart",
                         text: "Remove"
                     }).attr("data-product-id", item.productId);
 
-                    row.append(
-                        $("<td>").append(removeButton)
-                    );
-
+                    row.append($("<td>").append(removeButton));
                     tbody.append(row);
                 });
 
                 $("#cartTotal").text(formatPrice(total));
             }
 
-            // Add a product to the shopping cart.
-            $("#productList").on("click", ".btn-success", function () {
-                const id = String(
-                    $(this).attr("data-product-id")
-                );
+            // Add a product to the cart.
+            $("#productList").on("click", ".add-to-cart", function () {
+                const id = String($(this).attr("data-product-id"));
 
                 const product = products.find(function (item) {
                     return getProductId(item) === id;
@@ -780,10 +795,7 @@
 
                 if (existingItem) {
                     if (existingItem.quantity >= 999) {
-                        showCartStatus(
-                            "Maximum quantity is 999.",
-                            false
-                        );
+                        showCartStatus("Maximum quantity is 999.", false);
                         return;
                     }
 
@@ -804,11 +816,9 @@
                 showCartStatus("Product added to your cart.", true);
             });
 
-            // Remove a product from the cart.
-            $("#cartList").on("click", ".btn-danger", function () {
-                const id = String(
-                    $(this).attr("data-product-id")
-                );
+            // Remove an item from the cart.
+            $("#cartList").on("click", ".remove-from-cart", function () {
+                const id = String($(this).attr("data-product-id"));
 
                 cart = cart.filter(function (item) {
                     return item.productId !== id;
@@ -821,12 +831,9 @@
                 showCartStatus("Product removed from your cart.", true);
             });
 
-            // Update the quantity of an item in the cart.
+            // Update the quantity of a cart item.
             $("#cartList").on("change", ".cart-quantity", function () {
-                const id = String(
-                    $(this).attr("data-product-id")
-                );
-
+                const id = String($(this).attr("data-product-id"));
                 const quantity = Number($(this).val());
 
                 if (!Number.isInteger(quantity) ||
@@ -858,11 +865,9 @@
             });
 
             // Search button.
-            $("#searchButton").on("click", function () {
-                searchProducts();
-            });
+            $("#searchButton").on("click", searchProducts);
 
-            // Search when the user presses Enter.
+            // Search when Enter is pressed.
             $("#searchInput").on("keydown", function (event) {
                 if (event.key === "Enter") {
                     event.preventDefault();
@@ -870,7 +875,7 @@
                 }
             });
 
-            // Display all products.
+            // Show all available products.
             $("#showAllButton").on("click", function () {
                 $("#searchInput").val("");
 
@@ -882,11 +887,11 @@
                 );
             });
 
-            // Generate and display the shopping cart JSON.
+            // Generate the shopping cart JSON document.
             $("#submitCart").on("click", function () {
                 if (cart.length === 0) {
                     showCartStatus(
-                        "Add a product before submitting your cart.",
+                        "Add at least one product before submitting.",
                         false
                     );
 
@@ -927,14 +932,12 @@
                 );
 
                 /*
-                    AJAX REST API placeholder.
-
-                    The Node.js REST API will be added later.
-                    This page currently generates JSON locally.
+                    The Node.js AJAX REST API will be connected later.
+                    This version generates JSON in the browser.
                 */
             });
 
-            // Clear all items from the cart.
+            // Clear the shopping cart.
             $("#clearCart").on("click", function () {
                 cart = [];
 
@@ -949,7 +952,7 @@
                 );
             });
 
-            // Load the products and cart when the page opens.
+            // Load the page.
             displayProducts(products);
             displayCart();
 
