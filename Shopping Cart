@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,48 +11,34 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
-    <!-- CSS: [Team Member Name] -->
+    <!-- Project CSS: [Team Member Name] -->
     <link rel="stylesheet" href="style.css">
 
     <!-- jQuery: [Team Member Name] -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
     <style>
-        /* CSS: [Team Member Name] */
-        .shopping-cart-container {
+        body {
+            background-color: #111827;
+            color: white;
+        }
+
+        .shopping-container {
             max-width: 1100px;
             margin: 30px auto;
-            padding: 30px;
+            padding: 25px;
             background-color: #1f2937;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         }
 
-        .shopping-cart-container h1,
-        .shopping-cart-container h2 {
+        h1, h2 {
             color: white;
         }
 
-        .cart-intro {
-            color: #d1d5db;
+        .intro {
             text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .cart-search {
-            margin-bottom: 20px;
-        }
-
-        .cart-search .form-control,
-        .cart-search .form-select,
-        .cart-quantity {
-            background-color: #f9fafb;
-            color: #111827;
-        }
-
-        .cart-table {
-            color: white;
-            vertical-align: middle;
+            color: #d1d5db;
+            margin-bottom: 25px;
         }
 
         .cart-table th {
@@ -64,54 +49,47 @@
         .cart-table td {
             background-color: #1f2937;
             color: white;
-        }
-
-        .cart-table .form-control {
-            min-width: 75px;
+            vertical-align: middle;
         }
 
         .cart-total {
             background-color: #111827;
             padding: 20px;
+            margin-top: 20px;
             border-radius: 8px;
             text-align: right;
-            margin-top: 20px;
         }
 
         .cart-total h3 {
             color: #93c5fd;
         }
 
-        .cart-json {
-            margin-top: 30px;
-        }
-
-        .cart-json pre {
+        #jsonOutput {
             background-color: #111827;
             color: #93c5fd;
+            padding: 20px;
             border: 1px solid #4b5563;
             border-radius: 8px;
-            padding: 20px;
             white-space: pre-wrap;
             overflow-wrap: anywhere;
             min-height: 100px;
         }
 
-        .cart-status {
-            margin-top: 15px;
+        .status {
+            margin-top: 12px;
             font-weight: bold;
         }
 
-        .empty-cart {
-            color: #d1d5db;
+        .empty-message {
             text-align: center;
-            padding: 25px;
+            padding: 20px;
+            color: #d1d5db;
         }
 
         @media (max-width: 600px) {
-            .shopping-cart-container {
+            .shopping-container {
+                margin: 15px;
                 padding: 15px;
-                margin: 15px auto;
             }
 
             .cart-total {
@@ -123,33 +101,48 @@
 
 <body>
 
-    <!-- HTML page structure: [Team Member Name] -->
-    <header>
+    <!-- Page structure: [Team Member Name] -->
+    <header class="text-center p-3">
         <div class="logo">🎮 GameZone</div>
         <p>Your Ultimate Gaming Store</p>
     </header>
 
-    <nav>
-        <a href="storefront.html">Home</a>
-        <a href="storefront.html#games">Games</a>
-        <a href="storefront.html#accessories">Accessories</a>
-        <a href="storefront.html#about">About</a>
-        <a href="signup.html">Sign Up</a>
-        <a href="product.html">Product Management</a>
-        <a href="shoppingcart.html" aria-current="page">Shopping Cart</a>
+    <nav class="text-center p-3">
+        <a href="storefront.html" class="btn btn-outline-light m-1">
+            Home
+        </a>
+        <a href="storefront.html#games" class="btn btn-outline-light m-1">
+            Games
+        </a>
+        <a href="storefront.html#accessories" class="btn btn-outline-light m-1">
+            Accessories
+        </a>
+        <a href="storefront.html#about" class="btn btn-outline-light m-1">
+            About
+        </a>
+        <a href="signup.html" class="btn btn-outline-light m-1">
+            Sign Up
+        </a>
+        <a href="product.html" class="btn btn-outline-light m-1">
+            Product Management
+        </a>
+        <a href="shoppingcart.html" class="btn btn-primary m-1"
+           aria-current="page">
+            Shopping Cart
+        </a>
     </nav>
 
     <main>
-        <section class="shopping-cart-container">
+        <div class="shopping-container">
 
-            <h1 class="text-center">Shopping Cart</h1>
+            <h1 class="text-center mb-3">Shopping Cart</h1>
 
-            <p class="cart-intro">
-                Search for your favorite gaming products and add them to your cart.
+            <p class="intro">
+                Search for gaming products and add them to your cart.
             </p>
 
-            <!-- jQuery product search: [Team Member Name] -->
-            <section class="cart-search">
+            <!-- Product search: [Team Member Name] -->
+            <section class="mb-4">
                 <label for="searchInput" class="form-label">
                     Search Products
                 </label>
@@ -157,33 +150,34 @@
                 <div class="input-group">
                     <input
                         type="search"
-                        class="form-control"
                         id="searchInput"
-                        placeholder="Search by product name, ID, or category"
-                        aria-label="Search products">
+                        class="form-control"
+                        placeholder="Search by ID, product name, or category">
 
                     <button
                         type="button"
-                        class="btn btn-primary"
-                        id="searchButton">
+                        id="searchButton"
+                        class="btn btn-primary">
                         Search
                     </button>
 
                     <button
                         type="button"
-                        class="btn btn-outline-light"
-                        id="showAllButton">
+                        id="showAllButton"
+                        class="btn btn-secondary">
                         Show All
                     </button>
                 </div>
+
+                <div id="searchStatus" class="status" role="status"></div>
             </section>
 
             <!-- Product catalog: [Team Member Name] -->
-            <section>
+            <section class="mb-4">
                 <h2>Available Products</h2>
 
                 <div class="table-responsive">
-                    <table class="table cart-table table-bordered">
+                    <table class="table table-bordered cart-table">
                         <thead>
                             <tr>
                                 <th>Product ID</th>
@@ -194,28 +188,19 @@
                             </tr>
                         </thead>
 
-                        <tbody id="productList">
-                            <tr>
-                                <td colspan="5" class="empty-cart">
-                                    Loading products...
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody id="productList"></tbody>
                     </table>
                 </div>
-
-                <div id="searchStatus" class="cart-status" role="status"
-                     aria-live="polite"></div>
             </section>
 
-            <hr class="my-4">
+            <hr>
 
-            <!-- Shopping cart HTML: [Team Member Name] -->
-            <section>
+            <!-- Shopping cart: [Team Member Name] -->
+            <section class="mt-4">
                 <h2>Your Cart</h2>
 
                 <div class="table-responsive">
-                    <table class="table cart-table table-bordered">
+                    <table class="table table-bordered cart-table">
                         <thead>
                             <tr>
                                 <th>Product ID</th>
@@ -227,13 +212,7 @@
                             </tr>
                         </thead>
 
-                        <tbody id="cartList">
-                            <tr>
-                                <td colspan="6" class="empty-cart">
-                                    Your shopping cart is empty.
-                                </td>
-                            </tr>
-                        </tbody>
+                        <tbody id="cartList"></tbody>
                     </table>
                 </div>
 
@@ -244,59 +223,55 @@
                     </h3>
                 </div>
 
-                <div class="d-flex flex-wrap gap-2 mt-3">
+                <div class="mt-3">
                     <button
                         type="button"
-                        class="btn btn-primary"
-                        id="submitCart">
+                        id="submitCart"
+                        class="btn btn-primary">
                         Submit Cart / Display JSON
                     </button>
 
                     <button
                         type="button"
-                        class="btn btn-outline-light"
-                        id="clearCart">
+                        id="clearCart"
+                        class="btn btn-danger">
                         Clear Cart
                     </button>
                 </div>
 
-                <div id="cartStatus" class="cart-status" role="status"
-                     aria-live="polite"></div>
+                <div id="cartStatus" class="status" role="status"></div>
             </section>
 
-            <!-- JSON shopping cart document: [Team Member Name] -->
-            <section class="cart-json">
+            <!-- JSON document: [Team Member Name] -->
+            <section class="mt-5">
                 <h2>Shopping Cart JSON Document</h2>
 
-                <p class="text-light">
-                    The JSON document appears here after you select
-                    Submit Cart / Display JSON.
+                <p>
+                    Click Submit Cart / Display JSON to generate the JSON
+                    document for your shopping cart.
                 </p>
 
                 <pre id="jsonOutput">No cart submitted yet.</pre>
             </section>
 
-        </section>
+        </div>
     </main>
 
     <footer class="text-center p-4">
         <p>&copy; 2026 GameZone. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript validation and cart behavior: [Team Member Name] -->
-    <!-- jQuery product search: [Team Member Name] -->
+    <!-- JavaScript and validation: [Team Member Name] -->
+    <!-- Product search and cart functions: [Team Member Name] -->
     <!-- JSON document generation: [Team Member Name] -->
     <script>
-        $(function () {
+        $(document).ready(function () {
 
             const PRODUCTS_KEY = "gameZoneProducts";
             const CART_KEY = "gameZoneCart";
 
-            /*
-             * Temporary sample products are provided for testing.
-             * Products saved by product.html can replace this catalog.
-             * No backend or REST API is required for this demonstration.
-             */
+            // Sample products allow the page to work before connecting
+            // product.html or the future Node.js REST API.
             const sampleProducts = [
                 {
                     productId: "G001",
@@ -324,18 +299,18 @@
                 },
                 {
                     productId: "A001",
-                    productDescription: "Gaming Controller",
-                    productCategory: "Controllers",
+                    productDescription: "Gaming Headset",
+                    productCategory: "Accessories",
                     productUnitOfMeasure: "Each",
-                    productPrice: 39.99,
+                    productPrice: 79.99,
                     productWeight: null
                 },
                 {
                     productId: "A002",
-                    productDescription: "Gaming Headset",
+                    productDescription: "Wireless Controller",
                     productCategory: "Accessories",
                     productUnitOfMeasure: "Each",
-                    productPrice: 59.99,
+                    productPrice: 64.99,
                     productWeight: null
                 },
                 {
@@ -343,107 +318,132 @@
                     productDescription: "Gaming Keyboard",
                     productCategory: "Accessories",
                     productUnitOfMeasure: "Each",
-                    productPrice: 69.99,
+                    productPrice: 89.99,
                     productWeight: null
                 }
             ];
 
-            let products = loadProducts();
-            let cart = loadCart();
+            // Load products saved by product.html, or use sample products.
+            let savedProducts = readJSON(PRODUCTS_KEY, null);
+            let products = normalizeProducts(savedProducts);
 
-            // Read products created by product.html when available.
-            function loadProducts() {
+            if (products.length === 0) {
+                products = sampleProducts;
+            }
+
+            // Load the cart saved in the browser.
+            let cart = readJSON(CART_KEY, []);
+
+            if (!Array.isArray(cart)) {
+                cart = [];
+            }
+
+            cart = cart.filter(function (item) {
+                return item &&
+                    typeof item.productId === "string" &&
+                    Number.isInteger(Number(item.quantity)) &&
+                    Number(item.quantity) > 0 &&
+                    Number.isFinite(Number(item.price));
+            }).map(function (item) {
+                return {
+                    productId: item.productId,
+                    productName: String(item.productName || "Product"),
+                    price: Number(item.price),
+                    quantity: Number(item.quantity)
+                };
+            });
+
+            // Read JSON safely from localStorage.
+            function readJSON(key, defaultValue) {
                 try {
-                    const saved = localStorage.getItem(PRODUCTS_KEY);
+                    const value = localStorage.getItem(key);
 
-                    if (saved !== null) {
-                        const parsed = JSON.parse(saved);
-
-                        if (Array.isArray(parsed)) {
-                            return parsed;
-                        }
-
-                        if (parsed && typeof parsed === "object") {
-                            return Object.values(parsed);
-                        }
+                    if (value === null) {
+                        return defaultValue;
                     }
+
+                    return JSON.parse(value);
                 } catch (error) {
-                    console.error("Could not read saved products.", error);
-                }
-
-                return sampleProducts.slice();
-            }
-
-            // Restore the shopping cart from this browser.
-            function loadCart() {
-                try {
-                    const saved = localStorage.getItem(CART_KEY);
-                    const parsed = saved ? JSON.parse(saved) : [];
-
-                    if (Array.isArray(parsed)) {
-                        return parsed.filter(function (item) {
-                            return item &&
-                                typeof item.productId === "string" &&
-                                Number.isInteger(item.quantity) &&
-                                item.quantity > 0;
-                        });
-                    }
-                } catch (error) {
-                    console.error("Could not read the saved cart.", error);
-                }
-
-                return [];
-            }
-
-            function saveCart() {
-                try {
-                    localStorage.setItem(CART_KEY, JSON.stringify(cart));
-                } catch (error) {
-                    showCartStatus(
-                        "The cart could not be saved in browser storage.",
-                        false
-                    );
+                    return defaultValue;
                 }
             }
 
-            // Support the price format used in product.html.
-            function getPrice(product) {
-                const rawPrice = product.productPrice;
-
-                if (typeof rawPrice === "number") {
-                    return rawPrice;
+            // Support a product object or an array of product objects.
+            function normalizeProducts(data) {
+                if (!data) {
+                    return [];
                 }
 
-                if (typeof rawPrice === "string") {
-                    return Number(rawPrice.replace(/[$,]/g, ""));
+                let list = [];
+
+                if (Array.isArray(data)) {
+                    list = data;
+                } else if (typeof data === "object") {
+                    list = Object.values(data);
                 }
 
-                return NaN;
+                return list.filter(function (product) {
+                    return product &&
+                        getProductId(product) !== "" &&
+                        getProductName(product) !== "";
+                });
             }
 
             function getProductId(product) {
-                return String(product.productId ?? "").trim();
+                return String(
+                    product.productId ??
+                    product.id ??
+                    ""
+                ).trim();
             }
 
             function getProductName(product) {
                 return String(
                     product.productDescription ??
                     product.productName ??
+                    product.name ??
                     "Unnamed Product"
+                ).trim();
+            }
+
+            function getPrice(product) {
+                const rawPrice = product.productPrice ??
+                    product.price ??
+                    0;
+
+                // Handles both numeric prices and values such as "$59.99".
+                return Number(
+                    String(rawPrice).replace(/[$,]/g, "").trim()
                 );
             }
 
+            function getCategory(product) {
+                return String(
+                    product.productCategory ??
+                    product.category ??
+                    "Other"
+                ).trim();
+            }
+
             function formatPrice(price) {
-                return price.toLocaleString("en-US", {
+                return Number(price).toLocaleString("en-US", {
                     style: "currency",
                     currency: "USD"
                 });
             }
 
-            function showSearchStatus(message, success) {
-                $("#searchStatus")
-                    .text(message)
-                    .css("color", success ? "#86efac" : "#fca5a5");
+            function saveCart() {
+                try {
+                    localStorage.setItem(
+                        CART_KEY,
+                        JSON.stringify(cart)
+                    );
+                } catch (error) {
+                    showCartStatus(
+                        "Unable to save the cart in this browser.",
+                        false
+                    );
+                }
             }
 
             function showCartStatus(message, success) {
@@ -452,42 +452,48 @@
                     .css("color", success ? "#86efac" : "#fca5a5");
             }
 
-            // Build product rows safely using text(), not HTML product data.
-            function displayProducts(list) {
+            function showSearchStatus(message, success) {
+                $("#searchStatus")
+                    .text(message)
+                    .css("color", success ? "#86efac" : "#fca5a5");
+            }
+
+            // Display products in the catalog table.
+            function displayProducts(productList) {
                 const tbody = $("#productList");
                 tbody.empty();
 
-                if (list.length === 0) {
+                if (productList.length === 0) {
                     tbody.append(
                         $("<tr>").append(
                             $("<td>", {
                                 colspan: 5,
-                                class: "empty-cart"
-                            }).text("No matching products found.")
+                                class: "empty-message"
+                            }).text("No products found.")
                         )
                     );
+
                     return;
                 }
 
-                list.forEach(function (product) {
+                productList.forEach(function (product) {
                     const id = getProductId(product);
                     const name = getProductName(product);
-                    const category = String(
-                        product.productCategory ?? "Other"
-                    );
+                    const category = getCategory(product);
                     const price = getPrice(product);
-
-                    if (!id || !Number.isFinite(price) || price < 0) {
-                        return;
-                    }
 
                     const row = $("<tr>");
 
                     row.append($("<td>").text(id));
                     row.append($("<td>").text(name));
                     row.append($("<td>").text(category));
+
                     row.append(
-                        $("<td>").text(formatPrice(price))
+                        $("<td>").text(
+                            Number.isFinite(price)
+                                ? formatPrice(price)
+                                : "Price unavailable"
+                        )
                     );
 
                     const addButton = $("<button>", {
@@ -496,25 +502,18 @@
                         text: "Add to Cart"
                     }).attr("data-product-id", id);
 
-                    row.append($("<td>").append(addButton));
+                    row.append(
+                        $("<td>").append(addButton)
+                    );
+
                     tbody.append(row);
                 });
-
-                if (tbody.children().length === 0) {
-                    tbody.append(
-                        $("<tr>").append(
-                            $("<td>", {
-                                colspan: 5,
-                                class: "empty-cart"
-                            }).text("No valid products available.")
-                        )
-                    );
-                }
             }
 
-            // Search by ID, description, or category.
+            // Search by product ID, description, or category.
             function searchProducts() {
-                const query = $("#searchInput").val()
+                const query = $("#searchInput")
+                    .val()
                     .trim()
                     .toLowerCase();
 
@@ -522,7 +521,7 @@
                     return [
                         getProductId(product),
                         getProductName(product),
-                        String(product.productCategory ?? "")
+                        getCategory(product)
                     ].some(function (value) {
                         return value.toLowerCase().includes(query);
                     });
@@ -536,7 +535,7 @@
                 );
             }
 
-            // Draw the cart and recalculate all subtotals.
+            // Display cart items and calculate the total.
             function displayCart() {
                 const tbody = $("#cartList");
                 tbody.empty();
@@ -548,15 +547,14 @@
                         $("<tr>").append(
                             $("<td>", {
                                 colspan: 6,
-                                class: "empty-cart"
+                                class: "empty-message"
                             }).text("Your shopping cart is empty.")
                         )
                     );
                 }
 
                 cart.forEach(function (item) {
-                    const price = Number(item.price);
-                    const subtotal = price * item.quantity;
+                    const subtotal = item.price * item.quantity;
                     total += subtotal;
 
                     const row = $("<tr>");
@@ -570,7 +568,7 @@
                     );
 
                     row.append(
-                        $("<td>").text(formatPrice(price))
+                        $("<td>").text(formatPrice(item.price))
                     );
 
                     const quantityInput = $("<input>", {
@@ -607,23 +605,38 @@
                 $("#cartTotal").text(formatPrice(total));
             }
 
-            // Add product to cart or increase its quantity.
+            // Invalidate previously generated JSON when the cart changes.
+            function resetJSONOutput() {
+                $("#jsonOutput").text(
+                    "Select Submit Cart / Display JSON to generate the document."
+                );
+            }
+
+            // Add products to the cart.
             $("#productList").on("click", ".add-to-cart", function () {
-                const id = String($(this).attr("data-product-id"));
+                const id = String(
+                    $(this).attr("data-product-id")
+                );
 
                 const product = products.find(function (item) {
                     return getProductId(item) === id;
                 });
 
                 if (!product) {
-                    showCartStatus("Product could not be found.", false);
+                    showCartStatus(
+                        "Product could not be found.",
+                        false
+                    );
                     return;
                 }
 
                 const price = getPrice(product);
 
                 if (!Number.isFinite(price) || price < 0) {
-                    showCartStatus("This product has an invalid price.", false);
+                    showCartStatus(
+                        "This product has an invalid price.",
+                        false
+                    );
                     return;
                 }
 
@@ -652,16 +665,19 @@
 
                 saveCart();
                 displayCart();
-                $("#jsonOutput").text(
-                    "Select Submit Cart / Display JSON to generate the document."
-                );
+                resetJSONOutput();
 
-                showCartStatus("Product added to your cart.", true);
+                showCartStatus(
+                    "Product added to your cart.",
+                    true
+                );
             });
 
-            // Remove a product completely from the cart.
+            // Remove products from the cart.
             $("#cartList").on("click", ".remove-from-cart", function () {
-                const id = String($(this).attr("data-product-id"));
+                const id = String(
+                    $(this).attr("data-product-id")
+                );
 
                 cart = cart.filter(function (item) {
                     return item.productId !== id;
@@ -669,17 +685,20 @@
 
                 saveCart();
                 displayCart();
+                resetJSONOutput();
 
-                $("#jsonOutput").text(
-                    "Select Submit Cart / Display JSON to generate the document."
+                showCartStatus(
+                    "Product removed from your cart.",
+                    true
                 );
-
-                showCartStatus("Product removed from your cart.", true);
             });
 
-            // Validate and update quantity.
+            // Validate and update the quantity.
             $("#cartList").on("change", ".cart-quantity", function () {
-                const id = String($(this).attr("data-product-id"));
+                const id = String(
+                    $(this).attr("data-product-id")
+                );
+
                 const quantity = Number($(this).val());
 
                 if (!Number.isInteger(quantity) ||
@@ -700,20 +719,19 @@
 
                 if (item) {
                     item.quantity = quantity;
+
                     saveCart();
                     displayCart();
-
-                    $("#jsonOutput").text(
-                        "Select Submit Cart / Display JSON to generate the document."
-                    );
+                    resetJSONOutput();
 
                     showCartStatus("Quantity updated.", true);
                 }
             });
 
-            // Search buttons.
+            // Search button.
             $("#searchButton").on("click", searchProducts);
 
+            // Search when Enter is pressed.
             $("#searchInput").on("keydown", function (event) {
                 if (event.key === "Enter") {
                     event.preventDefault();
@@ -721,23 +739,29 @@
                 }
             });
 
+            // Show the complete catalog.
             $("#showAllButton").on("click", function () {
                 $("#searchInput").val("");
                 displayProducts(products);
-                showSearchStatus("Showing all available products.", true);
+
+                showSearchStatus(
+                    "Showing all available products.",
+                    true
+                );
             });
 
-            // Generate the required JSON shopping cart document.
+            // Generate the JSON shopping cart document.
             $("#submitCart").on("click", function () {
                 if (cart.length === 0) {
                     showCartStatus(
-                        "Add at least one product before submitting the cart.",
+                        "Add at least one product before submitting.",
                         false
                     );
 
                     $("#jsonOutput").text(
                         "No JSON document generated. Your cart is empty."
                     );
+
                     return;
                 }
 
@@ -753,9 +777,11 @@
                             )
                         };
                     }),
+
                     total: Number(
                         cart.reduce(function (sum, item) {
-                            return sum + item.price * item.quantity;
+                            return sum +
+                                item.price * item.quantity;
                         }, 0).toFixed(2)
                     )
                 };
@@ -771,24 +797,27 @@
 
                 /*
                  * AJAX REST API placeholder:
-                 * The Node.js REST API will be developed in a later assignment.
-                 * When the API is available, send the shoppingCart object using
-                 * $.ajax() with JSON.stringify(shoppingCart).
-                 * No server request is made in this assignment.
+                 * The Node.js REST API will be developed later.
+                 * No server request is made by this page yet.
                  */
             });
 
-            // Clear all cart items.
+            // Empty the shopping cart.
             $("#clearCart").on("click", function () {
                 cart = [];
+
                 saveCart();
                 displayCart();
 
                 $("#jsonOutput").text("No cart submitted yet.");
-                showCartStatus("Your shopping cart has been cleared.", true);
+
+                showCartStatus(
+                    "Your shopping cart has been cleared.",
+                    true
+                );
             });
 
-            // Initial page setup.
+            // Display the products and saved cart when the page opens.
             displayProducts(products);
             displayCart();
 
