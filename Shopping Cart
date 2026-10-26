@@ -6,94 +6,227 @@
 
     <title>GameZone - Shopping Cart</title>
 
-    <!-- Bootstrap: [Team Member Name] -->
+    <!-- Bootstrap CSS: Team Member 1 -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet">
 
-    <!-- Project CSS: [Team Member Name] -->
+    <!-- Project stylesheet -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- jQuery: [Team Member Name] -->
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
+    <!-- Shopping cart page styles: Team Member 1 -->
     <style>
         body {
-            background-color: #111827;
-            color: white;
+            background: #0b1120;
+            color: #f9fafb;
+            font-family: Arial, sans-serif;
+            margin: 0;
         }
 
-        .shopping-container {
-            max-width: 1100px;
+        header {
+            background: #111827;
+            padding: 25px 15px;
+            text-align: center;
+            border-bottom: 2px solid #2563eb;
+        }
+
+        header h1 {
+            color: #60a5fa;
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #d1d5db;
+            margin: 0;
+        }
+
+        nav {
+            background: #1f2937;
+            padding: 15px;
+            text-align: center;
+        }
+
+        nav a {
+            margin: 4px;
+        }
+
+        .page-container {
+            max-width: 1150px;
             margin: 30px auto;
             padding: 25px;
-            background-color: #1f2937;
+            background: #111827;
+            border: 1px solid #374151;
             border-radius: 12px;
         }
 
-        h1, h2 {
-            color: white;
+        .section-title {
+            color: #60a5fa;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 18px;
         }
 
         .intro {
-            text-align: center;
             color: #d1d5db;
+            text-align: center;
             margin-bottom: 25px;
         }
 
-        .cart-table th {
-            background-color: #374151;
-            color: white;
+        .form-control,
+        .form-select {
+            background: #f9fafb;
+            color: #111827;
         }
 
-        .cart-table td {
-            background-color: #1f2937;
-            color: white;
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #60a5fa;
+            box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+        }
+
+        .btn {
+            border-radius: 6px;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: #2563eb;
+            border-color: #2563eb;
+        }
+
+        .btn-primary:hover {
+            background: #1d4ed8;
+        }
+
+        .btn-success {
+            background: #059669;
+            border-color: #059669;
+        }
+
+        .btn-success:hover {
+            background: #047857;
+        }
+
+        .btn-danger {
+            background: #dc2626;
+            border-color: #dc2626;
+        }
+
+        .btn-danger:hover {
+            background: #b91c1c;
+        }
+
+        .table-responsive {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .cart-table {
+            margin-bottom: 0;
             vertical-align: middle;
         }
 
-        .cart-total {
-            background-color: #111827;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 8px;
-            text-align: right;
-        }
-
-        .cart-total h3 {
+        .cart-table thead th {
+            background: #1f2937;
             color: #93c5fd;
+            padding: 14px;
+            white-space: nowrap;
         }
 
-        #jsonOutput {
-            background-color: #111827;
-            color: #93c5fd;
-            padding: 20px;
-            border: 1px solid #4b5563;
-            border-radius: 8px;
-            white-space: pre-wrap;
-            overflow-wrap: anywhere;
-            min-height: 100px;
+        .cart-table tbody td {
+            background: #172033;
+            color: #f9fafb;
+            padding: 12px;
         }
 
-        .status {
-            margin-top: 12px;
-            font-weight: bold;
+        .cart-table tbody tr:hover td {
+            background: #202c42;
+        }
+
+        .cart-table .form-control {
+            min-width: 75px;
+            max-width: 100px;
         }
 
         .empty-message {
             text-align: center;
+            padding: 25px !important;
+            color: #d1d5db !important;
+        }
+
+        .status-message {
+            margin-top: 12px;
+            min-height: 22px;
+            font-weight: bold;
+        }
+
+        .cart-summary {
+            background: #1f2937;
             padding: 20px;
-            color: #d1d5db;
+            margin-top: 20px;
+            border-radius: 8px;
+            text-align: right;
+            border: 1px solid #374151;
+        }
+
+        .cart-summary h3 {
+            color: #60a5fa;
+            margin: 0;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        #jsonOutput {
+            background: #080d18;
+            color: #93c5fd;
+            border: 1px solid #374151;
+            border-radius: 8px;
+            padding: 18px;
+            min-height: 100px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .page-divider {
+            border-color: #374151;
+            margin: 30px 0;
+        }
+
+        footer {
+            background: #111827;
+            color: #9ca3af;
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
         }
 
         @media (max-width: 600px) {
-            .shopping-container {
+            .page-container {
                 margin: 15px;
                 padding: 15px;
             }
 
-            .cart-total {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            .cart-summary {
                 text-align: left;
+            }
+
+            .action-buttons .btn {
+                width: 100%;
             }
         }
     </style>
@@ -101,177 +234,179 @@
 
 <body>
 
-    <!-- Page structure: [Team Member Name] -->
-    <header class="text-center p-3">
-        <div class="logo">🎮 GameZone</div>
+    <!-- Header section: Team Member 1 -->
+    <header>
+        <h1>🎮 GameZone</h1>
         <p>Your Ultimate Gaming Store</p>
     </header>
 
-    <nav class="text-center p-3">
-        <a href="storefront.html" class="btn btn-outline-light m-1">
-            Home
-        </a>
-        <a href="storefront.html#games" class="btn btn-outline-light m-1">
-            Games
-        </a>
-        <a href="storefront.html#accessories" class="btn btn-outline-light m-1">
+    <!-- Navigation section: Team Member 1 -->
+    <nav>
+        <a href="storefront.html" class="btn btn-outline-light">Home</a>
+        <a href="storefront.html#games" class="btn btn-outline-light">Games</a>
+        <a href="storefront.html#accessories" class="btn btn-outline-light">
             Accessories
         </a>
-        <a href="storefront.html#about" class="btn btn-outline-light m-1">
-            About
-        </a>
-        <a href="signup.html" class="btn btn-outline-light m-1">
-            Sign Up
-        </a>
-        <a href="product.html" class="btn btn-outline-light m-1">
+        <a href="storefront.html#about" class="btn btn-outline-light">About</a>
+        <a href="signup.html" class="btn btn-outline-light">Sign Up</a>
+        <a href="product.html" class="btn btn-outline-light">
             Product Management
         </a>
-        <a href="shoppingcart.html" class="btn btn-primary m-1"
-           aria-current="page">
+        <a href="shoppingcart.html" class="btn btn-primary">
             Shopping Cart
         </a>
     </nav>
 
-    <main>
-        <div class="shopping-container">
+    <main class="page-container">
 
-            <h1 class="text-center mb-3">Shopping Cart</h1>
+        <h2 class="text-center mb-3">Shopping Cart</h2>
 
-            <p class="intro">
-                Search for gaming products and add them to your cart.
+        <p class="intro">
+            Search for your favorite gaming products and add them to your cart.
+        </p>
+
+        <!-- Product search section: Team Member 1 -->
+        <section class="mb-4">
+            <h3 class="section-title">Search Products</h3>
+
+            <div class="input-group">
+                <input
+                    type="search"
+                    id="searchInput"
+                    class="form-control"
+                    placeholder="Search by product ID, name, or category"
+                    aria-label="Search products">
+
+                <button
+                    type="button"
+                    id="searchButton"
+                    class="btn btn-primary">
+                    Search
+                </button>
+
+                <button
+                    type="button"
+                    id="showAllButton"
+                    class="btn btn-secondary">
+                    Show All
+                </button>
+            </div>
+
+            <div
+                id="searchStatus"
+                class="status-message"
+                role="status">
+            </div>
+        </section>
+
+        <!-- Product catalog section: Team Member 1 -->
+        <section>
+            <h3 class="section-title">Available Products</h3>
+
+            <div class="table-responsive">
+                <table class="table table-bordered cart-table">
+                    <thead>
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Product Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="productList"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <hr class="page-divider">
+
+        <!-- Shopping cart section: Team Member 1 -->
+        <section>
+            <h3 class="section-title">Your Shopping Cart</h3>
+
+            <div class="table-responsive">
+                <table class="table table-bordered cart-table">
+                    <thead>
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Product Name</th>
+                            <th>Unit Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="cartList"></tbody>
+                </table>
+            </div>
+
+            <div class="cart-summary">
+                <h3>
+                    Cart Total:
+                    <span id="cartTotal">$0.00</span>
+                </h3>
+            </div>
+
+            <div class="action-buttons">
+                <button
+                    type="button"
+                    id="submitCart"
+                    class="btn btn-primary">
+                    Submit Cart / Display JSON
+                </button>
+
+                <button
+                    type="button"
+                    id="clearCart"
+                    class="btn btn-danger">
+                    Clear Cart
+                </button>
+            </div>
+
+            <div
+                id="cartStatus"
+                class="status-message"
+                role="status">
+            </div>
+        </section>
+
+        <!-- JSON output section: Team Member 1 -->
+        <hr class="page-divider">
+
+        <section>
+            <h3 class="section-title">Shopping Cart JSON Document</h3>
+
+            <p>
+                Submit your cart to display the shopping cart information
+                in JSON format.
             </p>
 
-            <!-- Product search: [Team Member Name] -->
-            <section class="mb-4">
-                <label for="searchInput" class="form-label">
-                    Search Products
-                </label>
+            <pre id="jsonOutput">No cart submitted yet.</pre>
+        </section>
 
-                <div class="input-group">
-                    <input
-                        type="search"
-                        id="searchInput"
-                        class="form-control"
-                        placeholder="Search by ID, product name, or category">
-
-                    <button
-                        type="button"
-                        id="searchButton"
-                        class="btn btn-primary">
-                        Search
-                    </button>
-
-                    <button
-                        type="button"
-                        id="showAllButton"
-                        class="btn btn-secondary">
-                        Show All
-                    </button>
-                </div>
-
-                <div id="searchStatus" class="status" role="status"></div>
-            </section>
-
-            <!-- Product catalog: [Team Member Name] -->
-            <section class="mb-4">
-                <h2>Available Products</h2>
-
-                <div class="table-responsive">
-                    <table class="table table-bordered cart-table">
-                        <thead>
-                            <tr>
-                                <th>Product ID</th>
-                                <th>Product</th>
-                                <th>Category</th>
-                                <th>Price</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="productList"></tbody>
-                    </table>
-                </div>
-            </section>
-
-            <hr>
-
-            <!-- Shopping cart: [Team Member Name] -->
-            <section class="mt-4">
-                <h2>Your Cart</h2>
-
-                <div class="table-responsive">
-                    <table class="table table-bordered cart-table">
-                        <thead>
-                            <tr>
-                                <th>Product ID</th>
-                                <th>Product</th>
-                                <th>Unit Price</th>
-                                <th>Quantity</th>
-                                <th>Subtotal</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-
-                        <tbody id="cartList"></tbody>
-                    </table>
-                </div>
-
-                <div class="cart-total">
-                    <h3>
-                        Cart Total:
-                        <span id="cartTotal">$0.00</span>
-                    </h3>
-                </div>
-
-                <div class="mt-3">
-                    <button
-                        type="button"
-                        id="submitCart"
-                        class="btn btn-primary">
-                        Submit Cart / Display JSON
-                    </button>
-
-                    <button
-                        type="button"
-                        id="clearCart"
-                        class="btn btn-danger">
-                        Clear Cart
-                    </button>
-                </div>
-
-                <div id="cartStatus" class="status" role="status"></div>
-            </section>
-
-            <!-- JSON document: [Team Member Name] -->
-            <section class="mt-5">
-                <h2>Shopping Cart JSON Document</h2>
-
-                <p>
-                    Click Submit Cart / Display JSON to generate the JSON
-                    document for your shopping cart.
-                </p>
-
-                <pre id="jsonOutput">No cart submitted yet.</pre>
-            </section>
-
-        </div>
     </main>
 
-    <footer class="text-center p-4">
+    <footer>
         <p>&copy; 2026 GameZone. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript and validation: [Team Member Name] -->
-    <!-- Product search and cart functions: [Team Member Name] -->
-    <!-- JSON document generation: [Team Member Name] -->
+    <!--
+        Team Member 1:
+        Product search, cart management, quantity updates,
+        total calculation, and JSON document generation.
+    -->
+
     <script>
         $(document).ready(function () {
 
             const PRODUCTS_KEY = "gameZoneProducts";
             const CART_KEY = "gameZoneCart";
 
-            // Sample products allow the page to work before connecting
-            // product.html or the future Node.js REST API.
+            // Sample products for testing the shopping cart.
+            // The page uses products saved by product.html when available.
             const sampleProducts = [
                 {
                     productId: "G001",
@@ -323,77 +458,25 @@
                 }
             ];
 
-            // Load products saved by product.html, or use sample products.
-            let savedProducts = readJSON(PRODUCTS_KEY, null);
-            let products = normalizeProducts(savedProducts);
-
-            if (products.length === 0) {
-                products = sampleProducts;
-            }
-
-            // Load the cart saved in the browser.
-            let cart = readJSON(CART_KEY, []);
-
-            if (!Array.isArray(cart)) {
-                cart = [];
-            }
-
-            cart = cart.filter(function (item) {
-                return item &&
-                    typeof item.productId === "string" &&
-                    Number.isInteger(Number(item.quantity)) &&
-                    Number(item.quantity) > 0 &&
-                    Number.isFinite(Number(item.price));
-            }).map(function (item) {
-                return {
-                    productId: item.productId,
-                    productName: String(item.productName || "Product"),
-                    price: Number(item.price),
-                    quantity: Number(item.quantity)
-                };
-            });
-
-            // Read JSON safely from localStorage.
+            // Read saved information from localStorage.
             function readJSON(key, defaultValue) {
                 try {
-                    const value = localStorage.getItem(key);
+                    const savedValue = localStorage.getItem(key);
 
-                    if (value === null) {
+                    if (savedValue === null) {
                         return defaultValue;
                     }
 
-                    return JSON.parse(value);
+                    return JSON.parse(savedValue);
                 } catch (error) {
                     return defaultValue;
                 }
             }
 
-            // Support a product object or an array of product objects.
-            function normalizeProducts(data) {
-                if (!data) {
-                    return [];
-                }
-
-                let list = [];
-
-                if (Array.isArray(data)) {
-                    list = data;
-                } else if (typeof data === "object") {
-                    list = Object.values(data);
-                }
-
-                return list.filter(function (product) {
-                    return product &&
-                        getProductId(product) !== "" &&
-                        getProductName(product) !== "";
-                });
-            }
-
+            // Get product information from different possible field names.
             function getProductId(product) {
                 return String(
-                    product.productId ??
-                    product.id ??
-                    ""
+                    product.productId ?? product.id ?? ""
                 ).trim();
             }
 
@@ -406,18 +489,7 @@
                 ).trim();
             }
 
-            function getPrice(product) {
-                const rawPrice = product.productPrice ??
-                    product.price ??
-                    0;
-
-                // Handles both numeric prices and values such as "$59.99".
-                return Number(
-                    String(rawPrice).replace(/[$,]/g, "").trim()
-                );
-            }
-
-            function getCategory(product) {
+            function getProductCategory(product) {
                 return String(
                     product.productCategory ??
                     product.category ??
@@ -425,6 +497,66 @@
                 ).trim();
             }
 
+            function getProductPrice(product) {
+                const value = product.productPrice ?? product.price ?? 0;
+
+                return Number(
+                    String(value).replace(/[$,]/g, "").trim()
+                );
+            }
+
+            // Convert the saved product data into an array.
+            function normalizeProducts(data) {
+                let productArray = [];
+
+                if (Array.isArray(data)) {
+                    productArray = data;
+                } else if (data && typeof data === "object") {
+                    productArray = Object.values(data);
+                }
+
+                return productArray.filter(function (product) {
+                    return product &&
+                        getProductId(product) !== "" &&
+                        getProductName(product) !== "";
+                });
+            }
+
+            // Load saved products or use the sample catalog.
+            const savedProducts = readJSON(PRODUCTS_KEY, null);
+
+            let products = normalizeProducts(savedProducts);
+
+            if (products.length === 0) {
+                products = sampleProducts;
+            }
+
+            // Load saved shopping cart information.
+            let cart = readJSON(CART_KEY, []);
+
+            if (!Array.isArray(cart)) {
+                cart = [];
+            }
+
+            // Validate and clean saved cart items.
+            cart = cart.filter(function (item) {
+                return item &&
+                    typeof item.productId === "string" &&
+                    Number.isInteger(Number(item.quantity)) &&
+                    Number(item.quantity) >= 1 &&
+                    Number(item.quantity) <= 999 &&
+                    Number.isFinite(Number(item.price)) &&
+                    Number(item.price) >= 0;
+            }).map(function (item) {
+                return {
+                    productId: item.productId,
+                    productName: String(item.productName || "Product"),
+                    price: Number(item.price),
+                    quantity: Number(item.quantity)
+                };
+            });
+
+            // Format prices as US dollars.
             function formatPrice(price) {
                 return Number(price).toLocaleString("en-US", {
                     style: "currency",
@@ -432,6 +564,7 @@
                 });
             }
 
+            // Save the shopping cart.
             function saveCart() {
                 try {
                     localStorage.setItem(
@@ -440,12 +573,13 @@
                     );
                 } catch (error) {
                     showCartStatus(
-                        "Unable to save the cart in this browser.",
+                        "Could not save the cart in this browser.",
                         false
                     );
                 }
             }
 
+            // Display feedback messages.
             function showCartStatus(message, success) {
                 $("#cartStatus")
                     .text(message)
@@ -458,29 +592,38 @@
                     .css("color", success ? "#86efac" : "#fca5a5");
             }
 
-            // Display products in the catalog table.
-            function displayProducts(productList) {
+            // Clear old JSON when the cart changes.
+            function resetJSONOutput() {
+                $("#jsonOutput").text(
+                    "Your cart changed. Submit the cart to generate updated JSON."
+                );
+            }
+
+            // Display products in the available products table.
+            function displayProducts(productArray) {
                 const tbody = $("#productList");
+
                 tbody.empty();
 
-                if (productList.length === 0) {
-                    tbody.append(
-                        $("<tr>").append(
-                            $("<td>", {
-                                colspan: 5,
-                                class: "empty-message"
-                            }).text("No products found.")
-                        )
+                if (productArray.length === 0) {
+                    const row = $("<tr>");
+
+                    row.append(
+                        $("<td>", {
+                            colspan: 5,
+                            class: "empty-message"
+                        }).text("No products found.")
                     );
 
+                    tbody.append(row);
                     return;
                 }
 
-                productList.forEach(function (product) {
+                productArray.forEach(function (product) {
                     const id = getProductId(product);
                     const name = getProductName(product);
-                    const category = getCategory(product);
-                    const price = getPrice(product);
+                    const category = getProductCategory(product);
+                    const price = getProductPrice(product);
 
                     const row = $("<tr>");
 
@@ -490,15 +633,15 @@
 
                     row.append(
                         $("<td>").text(
-                            Number.isFinite(price)
+                            Number.isFinite(price) && price >= 0
                                 ? formatPrice(price)
-                                : "Price unavailable"
+                                : "Invalid price"
                         )
                     );
 
                     const addButton = $("<button>", {
                         type: "button",
-                        class: "btn btn-success btn-sm add-to-cart",
+                        class: "btn btn-success btn-sm",
                         text: "Add to Cart"
                     }).attr("data-product-id", id);
 
@@ -510,9 +653,9 @@
                 });
             }
 
-            // Search by product ID, description, or category.
+            // Search by product ID, product name, or category.
             function searchProducts() {
-                const query = $("#searchInput")
+                const searchText = $("#searchInput")
                     .val()
                     .trim()
                     .toLowerCase();
@@ -521,9 +664,9 @@
                     return [
                         getProductId(product),
                         getProductName(product),
-                        getCategory(product)
+                        getProductCategory(product)
                     ].some(function (value) {
-                        return value.toLowerCase().includes(query);
+                        return value.toLowerCase().includes(searchText);
                     });
                 });
 
@@ -538,23 +681,27 @@
             // Display cart items and calculate the total.
             function displayCart() {
                 const tbody = $("#cartList");
+
                 tbody.empty();
 
                 let total = 0;
 
                 if (cart.length === 0) {
-                    tbody.append(
-                        $("<tr>").append(
-                            $("<td>", {
-                                colspan: 6,
-                                class: "empty-message"
-                            }).text("Your shopping cart is empty.")
-                        )
+                    const row = $("<tr>");
+
+                    row.append(
+                        $("<td>", {
+                            colspan: 6,
+                            class: "empty-message"
+                        }).text("Your shopping cart is empty.")
                     );
+
+                    tbody.append(row);
                 }
 
                 cart.forEach(function (item) {
                     const subtotal = item.price * item.quantity;
+
                     total += subtotal;
 
                     const row = $("<tr>");
@@ -591,7 +738,7 @@
 
                     const removeButton = $("<button>", {
                         type: "button",
-                        class: "btn btn-danger btn-sm remove-from-cart",
+                        class: "btn btn-danger btn-sm",
                         text: "Remove"
                     }).attr("data-product-id", item.productId);
 
@@ -605,15 +752,8 @@
                 $("#cartTotal").text(formatPrice(total));
             }
 
-            // Invalidate previously generated JSON when the cart changes.
-            function resetJSONOutput() {
-                $("#jsonOutput").text(
-                    "Select Submit Cart / Display JSON to generate the document."
-                );
-            }
-
-            // Add products to the cart.
-            $("#productList").on("click", ".add-to-cart", function () {
+            // Add a product to the shopping cart.
+            $("#productList").on("click", ".btn-success", function () {
                 const id = String(
                     $(this).attr("data-product-id")
                 );
@@ -623,37 +763,31 @@
                 });
 
                 if (!product) {
-                    showCartStatus(
-                        "Product could not be found.",
-                        false
-                    );
+                    showCartStatus("Product not found.", false);
                     return;
                 }
 
-                const price = getPrice(product);
+                const price = getProductPrice(product);
 
                 if (!Number.isFinite(price) || price < 0) {
-                    showCartStatus(
-                        "This product has an invalid price.",
-                        false
-                    );
+                    showCartStatus("This product has an invalid price.", false);
                     return;
                 }
 
-                const existing = cart.find(function (item) {
+                const existingItem = cart.find(function (item) {
                     return item.productId === id;
                 });
 
-                if (existing) {
-                    if (existing.quantity >= 999) {
+                if (existingItem) {
+                    if (existingItem.quantity >= 999) {
                         showCartStatus(
-                            "Maximum quantity is 999 per product.",
+                            "Maximum quantity is 999.",
                             false
                         );
                         return;
                     }
 
-                    existing.quantity += 1;
+                    existingItem.quantity += 1;
                 } else {
                     cart.push({
                         productId: id,
@@ -667,14 +801,11 @@
                 displayCart();
                 resetJSONOutput();
 
-                showCartStatus(
-                    "Product added to your cart.",
-                    true
-                );
+                showCartStatus("Product added to your cart.", true);
             });
 
-            // Remove products from the cart.
-            $("#cartList").on("click", ".remove-from-cart", function () {
+            // Remove a product from the cart.
+            $("#cartList").on("click", ".btn-danger", function () {
                 const id = String(
                     $(this).attr("data-product-id")
                 );
@@ -687,13 +818,10 @@
                 displayCart();
                 resetJSONOutput();
 
-                showCartStatus(
-                    "Product removed from your cart.",
-                    true
-                );
+                showCartStatus("Product removed from your cart.", true);
             });
 
-            // Validate and update the quantity.
+            // Update the quantity of an item in the cart.
             $("#cartList").on("change", ".cart-quantity", function () {
                 const id = String(
                     $(this).attr("data-product-id")
@@ -704,8 +832,9 @@
                 if (!Number.isInteger(quantity) ||
                     quantity < 1 ||
                     quantity > 999) {
+
                     showCartStatus(
-                        "Quantity must be a whole number from 1 to 999.",
+                        "Enter a whole number from 1 to 999.",
                         false
                     );
 
@@ -713,8 +842,8 @@
                     return;
                 }
 
-                const item = cart.find(function (entry) {
-                    return entry.productId === id;
+                const item = cart.find(function (cartItem) {
+                    return cartItem.productId === id;
                 });
 
                 if (item) {
@@ -729,9 +858,11 @@
             });
 
             // Search button.
-            $("#searchButton").on("click", searchProducts);
+            $("#searchButton").on("click", function () {
+                searchProducts();
+            });
 
-            // Search when Enter is pressed.
+            // Search when the user presses Enter.
             $("#searchInput").on("keydown", function (event) {
                 if (event.key === "Enter") {
                     event.preventDefault();
@@ -739,9 +870,10 @@
                 }
             });
 
-            // Show the complete catalog.
+            // Display all products.
             $("#showAllButton").on("click", function () {
                 $("#searchInput").val("");
+
                 displayProducts(products);
 
                 showSearchStatus(
@@ -750,16 +882,16 @@
                 );
             });
 
-            // Generate the JSON shopping cart document.
+            // Generate and display the shopping cart JSON.
             $("#submitCart").on("click", function () {
                 if (cart.length === 0) {
                     showCartStatus(
-                        "Add at least one product before submitting.",
+                        "Add a product before submitting your cart.",
                         false
                     );
 
                     $("#jsonOutput").text(
-                        "No JSON document generated. Your cart is empty."
+                        "No JSON document generated because the cart is empty."
                     );
 
                     return;
@@ -780,8 +912,7 @@
 
                     total: Number(
                         cart.reduce(function (sum, item) {
-                            return sum +
-                                item.price * item.quantity;
+                            return sum + item.price * item.quantity;
                         }, 0).toFixed(2)
                     )
                 };
@@ -791,18 +922,19 @@
                 );
 
                 showCartStatus(
-                    "Shopping cart JSON document generated successfully.",
+                    "Shopping cart JSON generated successfully.",
                     true
                 );
 
                 /*
-                 * AJAX REST API placeholder:
-                 * The Node.js REST API will be developed later.
-                 * No server request is made by this page yet.
-                 */
+                    AJAX REST API placeholder.
+
+                    The Node.js REST API will be added later.
+                    This page currently generates JSON locally.
+                */
             });
 
-            // Empty the shopping cart.
+            // Clear all items from the cart.
             $("#clearCart").on("click", function () {
                 cart = [];
 
@@ -817,7 +949,7 @@
                 );
             });
 
-            // Display the products and saved cart when the page opens.
+            // Load the products and cart when the page opens.
             displayProducts(products);
             displayCart();
 
