@@ -8,549 +8,230 @@
     <title>GameZone - Shopping Cart</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <!-- AngularJS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- Shopping Cart page developed by: YOUR NAME -->
 
-    <!-- Website stylesheet -->
-    <link rel="stylesheet" href="style.css">
-
-    <!-- Shopping Cart page developed by: REPLACE WITH YOUR NAME -->
     <style>
         body {
-            background-color: #f2f5f9;
             font-family: Arial, sans-serif;
+            padding: 0 18px;
         }
 
-        header {
-            background-color: #101b35;
-            color: white;
+        h1 {
             text-align: center;
-            padding: 25px;
+            font-size: 28px;
+            margin-bottom: 6px;
         }
 
-        nav {
-            background-color: #17294d;
-            padding: 14px;
-            text-align: center;
+        #productSelect {
+            width: 100%;
         }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 10px;
-            display: inline-block;
-            padding: 5px;
+        #cartTable {
+            margin-top: 10px;
         }
 
-        nav a:hover {
-            color: #76b8ff;
+        #cartTable th,
+        #cartTable td {
+            vertical-align: middle;
+            font-size: 12px;
         }
 
-        .page-container {
-            max-width: 1100px;
-            margin: 30px auto;
-            padding: 20px;
+        .quantity {
+            width: 100%;
+            min-width: 80px;
         }
 
-        .content-box {
-            background-color: white;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px #00000012;
-        }
-
-        h2 {
-            color: #17294d;
-            margin-bottom: 20px;
-        }
-
-        .btn-gamezone {
-            background-color: #173d78;
-            color: white;
-        }
-
-        .btn-gamezone:hover {
-            background-color: #2457a1;
-            color: white;
+        #totalRow {
+            text-align: right;
+            font-size: 12px;
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
         }
 
         #jsonOutput {
-            background-color: #101b35;
-            color: #a9f5bd;
-            padding: 20px;
-            border-radius: 8px;
+            font-size: 12px;
             white-space: pre-wrap;
             overflow-wrap: anywhere;
+            margin-top: 8px;
         }
 
-        footer {
-            background-color: #101b35;
-            color: white;
-            text-align: center;
-            padding: 20px;
+        #checkoutSection {
+            margin-top: 12px;
         }
     </style>
 </head>
 
-<body ng-app="gameZoneApp" ng-controller="cartController">
+<body>
 
-    <header>
-        <h1>🎮 GameZone</h1>
-        <p>Your Ultimate Gaming Store</p>
-    </header>
+    <h1>Shopping Cart</h1>
 
-    <nav>
-        <a href="storefront.html">Home</a>
-        <a href="storefront.html#games">Games</a>
-        <a href="storefront.html#accessories">Accessories</a>
-        <a href="product.html">Product Management</a>
-        <a href="shoppingcart.html">Shopping Cart</a>
-        <a href="shipping.html">Shipping Selection</a>
-        <a href="signup.html">Sign Up</a>
-    </nav>
+    <div class="mb-2">
+        <select id="productSelect" class="form-select form-select-sm">
+            <option value="001" data-name="Mens Jeans" data-price="59.99">
+                Mens Jeans
+            </option>
+            <option value="004" data-name="Womens T-Shirt" data-price="19.99">
+                Womens T-Shirt
+            </option>
+            <option value="002" data-name="Gaming Controller" data-price="39.99">
+                Gaming Controller
+            </option>
+            <option value="003" data-name="Gaming Headset" data-price="59.99">
+                Gaming Headset
+            </option>
+            <option value="005" data-name="Gaming Keyboard" data-price="69.99">
+                Gaming Keyboard
+            </option>
+        </select>
 
-    <main class="page-container">
+        <button type="button" id="addButton"
+                class="btn btn-primary btn-sm mt-1">
+            Add
+        </button>
+    </div>
 
-        <section class="content-box">
-            <h2>Shopping Cart</h2>
-            <p>Search for products saved by the Product Management page.</p>
+    <table id="cartTable" class="table table-sm">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th>Action</th>
+            </tr>
+        </thead>
 
-            <div class="row g-3">
-                <div class="col-md-8">
-                    <label for="productSearch" class="form-label">
-                        Search Products
-                    </label>
-                    <input
-                        type="text"
-                        id="productSearch"
-                        class="form-control"
-                        placeholder="Enter a product name">
-                </div>
+        <tbody id="cartItems"></tbody>
+    </table>
 
-                <div class="col-md-4 d-flex align-items-end">
-                    <button type="button" id="searchButton"
-                            class="btn btn-gamezone w-100">
-                        Search
-                    </button>
-                </div>
-            </div>
+    <div id="totalRow">
+        <strong>Total:</strong>
+        &nbsp; $<span id="cartTotal">0.00</span>
+    </div>
 
-            <div id="searchResults" class="mt-4"></div>
-        </section>
+    <div id="checkoutSection">
+        <button type="button" id="checkoutButton"
+                class="btn btn-success btn-sm">
+            Checkout
+        </button>
 
-        <section class="content-box">
-            <h2>Your Items</h2>
-
-            <p id="cartMessage">Your cart is empty.</p>
-
-            <div class="table-responsive">
-                <table class="table table-striped align-middle">
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Subtotal</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="cartItems"></tbody>
-                </table>
-            </div>
-
-            <h4 class="text-end">
-                Total: $<span id="cartTotal">0.00</span>
-            </h4>
-
-            <button type="button" id="clearCart"
-                    class="btn btn-outline-danger">
-                Clear Cart
-            </button>
-        </section>
-
-        <section class="content-box">
-            <h2>Customer and Shipping Information</h2>
-
-            <form id="orderForm">
-                <div class="row g-3">
-
-                    <div class="col-md-6">
-                        <label for="customerName" class="form-label">
-                            Full Name
-                        </label>
-                        <input type="text" id="customerName"
-                               class="form-control" required>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">
-                            Email Address
-                        </label>
-                        <input type="email" id="email"
-                               class="form-control" required>
-                    </div>
-
-                    <div class="col-12">
-                        <label for="address" class="form-label">
-                            Street Address
-                        </label>
-                        <input type="text" id="address"
-                               class="form-control" required>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="city" class="form-label">City</label>
-                        <input type="text" id="city"
-                               class="form-control" required>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="state" class="form-label">State</label>
-                        <input type="text" id="state"
-                               class="form-control" required>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="zipCode" class="form-label">
-                            ZIP Code
-                        </label>
-                        <input type="text" id="zipCode"
-                               class="form-control"
-                               pattern="[0-9]{5}(-[0-9]{4})?"
-                               title="Enter a valid ZIP code"
-                               required>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="carrier" class="form-label">
-                            Shipping Carrier
-                        </label>
-                        <select id="carrier" class="form-select" required>
-                            <option value="">Select a carrier</option>
-                            <option value="FedEx">FedEx</option>
-                            <option value="UPS">UPS</option>
-                            <option value="USPS">USPS</option>
-                            <option value="DHL">DHL</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="shippingMethod" class="form-label">
-                            Shipping Method
-                        </label>
-                        <select id="shippingMethod"
-                                class="form-select" required>
-                            <option value="">Select a method</option>
-                            <option value="Overnight">Overnight</option>
-                            <option value="2nd Day">2nd Day</option>
-                            <option value="Ground">Ground</option>
-                        </select>
-                    </div>
-
-                </div>
-
-                <div class="mt-4">
-                    <button type="submit" class="btn btn-gamezone">
-                        Submit Order
-                    </button>
-                    <button type="reset"
-                            class="btn btn-secondary ms-2">
-                        Reset Form
-                    </button>
-                </div>
-            </form>
-        </section>
-
-        <section class="content-box" id="orderResult" hidden>
-            <h2>Order JSON</h2>
-            <p>
-                This is the JSON document created from the information
-                entered above.
-            </p>
-            <pre id="jsonOutput"></pre>
-        </section>
-
-        <section class="content-box">
-            <h2>Order Summary</h2>
-
-            <p><strong>Customer:</strong> {{ submittedOrder.customerName || 'Not submitted' }}</p>
-            <p><strong>Email:</strong> {{ submittedOrder.email || 'Not submitted' }}</p>
-            <p><strong>Carrier:</strong> {{ submittedOrder.carrier || 'Not selected' }}</p>
-            <p><strong>Shipping:</strong> {{ submittedOrder.shippingMethod || 'Not selected' }}</p>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>&copy; 2026 GameZone. All rights reserved.</p>
-    </footer>
+        <pre id="jsonOutput"></pre>
+    </div>
 
     <script>
-        // Shopping Cart JavaScript developed by: REPLACE WITH YOUR NAME
+        // Shopping Cart JavaScript developed by: YOUR NAME
 
-        var app = angular.module("gameZoneApp", []);
+        var cart = [];
 
-        app.controller("cartController", function ($scope) {
-            $scope.submittedOrder = {};
+        // Add a selected product to the cart.
+        $("#addButton").on("click", function () {
+            var selected = $("#productSelect option:selected");
+
+            var productId = selected.val();
+            var productName = selected.data("name");
+            var price = Number(selected.data("price"));
+
+            // Check whether the product is already in the cart.
+            var existingProduct = cart.find(function (item) {
+                return item.productId === productId;
+            });
+
+            if (existingProduct) {
+                existingProduct.quantity++;
+            } else {
+                cart.push({
+                    productId: productId,
+                    productName: productName,
+                    price: price,
+                    quantity: 1,
+                    total: price
+                });
+            }
+
+            displayCart();
         });
 
-        // Read saved cart items from the browser.
-        // Expected cart format:
-        // [{ productId, productDescription, quantity, productPrice }]
-
-        function getCart() {
-            try {
-                return JSON.parse(localStorage.getItem("gameZoneCart")) || [];
-            } catch (error) {
-                return [];
-            }
-        }
-
-        function saveCart(cart) {
-            localStorage.setItem("gameZoneCart", JSON.stringify(cart));
-        }
-
-        function getProductName(product) {
-            return product.productDescription ||
-                   product.name ||
-                   product.productName ||
-                   "GameZone Product";
-        }
-
-        function getProductPrice(product) {
-            var price = Number(
-                product.productPrice !== undefined
-                    ? product.productPrice
-                    : product.price
-            );
-
-            return Number.isFinite(price) && price >= 0 ? price : 0;
-        }
-
-        function getProductId(product, index) {
-            return product.productId || product.id || String(index + 1);
-        }
-
-        function getQuantity(product) {
-            var quantity = parseInt(product.quantity, 10);
-            return Number.isInteger(quantity) && quantity > 0 ? quantity : 1;
-        }
-
-        // Display the items currently in the cart.
+        // Display cart products and calculate totals.
         function displayCart() {
-            var cart = getCart();
-            var total = 0;
-
             $("#cartItems").empty();
 
-            if (cart.length === 0) {
-                $("#cartMessage").text(
-                    "Your cart is empty. Search for a product below or add items from your product page."
-                );
-            } else {
-                $("#cartMessage").text(
-                    "You currently have " + cart.length + " item type(s) in your cart."
-                );
-            }
+            var cartTotal = 0;
 
             cart.forEach(function (product, index) {
-                var name = getProductName(product);
-                var price = getProductPrice(product);
-                var quantity = getQuantity(product);
-                var subtotal = price * quantity;
-
-                total += subtotal;
+                product.total = product.price * product.quantity;
+                cartTotal += product.total;
 
                 var row = $("<tr></tr>");
-                row.append($("<td></td>").text(name));
-                row.append($("<td></td>").text("$" + price.toFixed(2)));
-                row.append($("<td></td>").text(quantity));
-                row.append($("<td></td>").text("$" + subtotal.toFixed(2)));
+
+                row.append($("<td></td>").text(product.productId));
+                row.append($("<td></td>").text(product.productName));
+                row.append($("<td></td>").text(
+                    "$" + product.price.toFixed(2)
+                ));
+
+                var quantityInput = $("<input>")
+                    .attr("type", "number")
+                    .attr("min", "1")
+                    .attr("step", "1")
+                    .addClass("quantity")
+                    .val(product.quantity);
+
+                quantityInput.on("change", function () {
+                    var quantity = Number($(this).val());
+
+                    if (!Number.isInteger(quantity) || quantity < 1) {
+                        quantity = 1;
+                    }
+
+                    product.quantity = quantity;
+                    displayCart();
+                });
+
+                row.append($("<td></td>").append(quantityInput));
+
+                row.append($("<td></td>").text(
+                    "$" + product.total.toFixed(2)
+                ));
 
                 var removeButton = $("<button></button>")
                     .attr("type", "button")
-                    .addClass("btn btn-sm btn-outline-danger")
-                    .text("Remove")
-                    .on("click", function () {
-                        var currentCart = getCart();
-                        currentCart.splice(index, 1);
-                        saveCart(currentCart);
-                        displayCart();
-                    });
+                    .addClass("btn btn-danger btn-sm")
+                    .text("Remove");
+
+                removeButton.on("click", function () {
+                    cart.splice(index, 1);
+                    displayCart();
+                });
 
                 row.append($("<td></td>").append(removeButton));
+
                 $("#cartItems").append(row);
             });
 
-            $("#cartTotal").text(total.toFixed(2));
+            $("#cartTotal").text(cartTotal.toFixed(2));
         }
 
-        // Search products saved by the Product Management page.
-        $("#searchButton").on("click", function () {
-            var searchText = $("#productSearch").val().trim().toLowerCase();
-            var products = [];
-
-            try {
-                products = JSON.parse(
-                    localStorage.getItem("gameZoneProducts")
-                ) || [];
-            } catch (error) {
-                products = [];
-            }
-
-            var results = $("#searchResults");
-            results.empty();
-
-            if (products.length === 0) {
-                results.text(
-                    "No saved products were found. Add products on the Product Management page first."
-                );
-                return;
-            }
-
-            var matchingProducts = products.filter(function (product) {
-                return getProductName(product).toLowerCase().includes(searchText);
-            });
-
-            if (matchingProducts.length === 0) {
-                results.text("No matching products were found.");
-                return;
-            }
-
-            matchingProducts.forEach(function (product) {
-                var card = $("<div></div>")
-                    .addClass("border rounded p-3 mb-2");
-
-                card.append(
-                    $("<h5></h5>").text(getProductName(product))
-                );
-
-                card.append(
-                    $("<p></p>").text(
-                        "Price: $" + getProductPrice(product).toFixed(2)
-                    )
-                );
-
-                var addButton = $("<button></button>")
-                    .attr("type", "button")
-                    .addClass("btn btn-gamezone")
-                    .text("Add to Cart")
-                    .on("click", function () {
-                        var cart = getCart();
-                        var productId = product.productId || product.id ||
-                                        getProductName(product);
-
-                        var existing = cart.find(function (item) {
-                            return String(item.productId || item.id) ===
-                                   String(productId);
-                        });
-
-                        if (existing) {
-                            existing.quantity = getQuantity(existing) + 1;
-                        } else {
-                            cart.push({
-                                productId: productId,
-                                productDescription: getProductName(product),
-                                quantity: 1,
-                                productPrice: getProductPrice(product)
-                            });
-                        }
-
-                        saveCart(cart);
-                        displayCart();
-                    });
-
-                card.append(addButton);
-                results.append(card);
-            });
-        });
-
-        // Clear all cart items.
-        $("#clearCart").on("click", function () {
-            localStorage.removeItem("gameZoneCart");
-            displayCart();
-        });
-
-        // Build the order JSON when the customer submits the form.
-        $("#orderForm").on("submit", function (event) {
-            event.preventDefault();
-
-            var cart = getCart();
-
+        // Convert the cart into JSON when Checkout is clicked.
+        $("#checkoutButton").on("click", function () {
             if (cart.length === 0) {
-                alert("Please add at least one product to your cart.");
+                $("#jsonOutput").text("Your shopping cart is empty.");
                 return;
             }
 
-            var items = cart.map(function (product, index) {
-                return {
-                    productId: getProductId(product, index),
-                    productDescription: getProductName(product),
-                    quantity: getQuantity(product),
-                    productPrice: getProductPrice(product)
-                };
-            });
+            var orderJSON = JSON.stringify(cart, null, 2);
 
-            var order = {
-                customerName: $("#customerName").val().trim(),
-                email: $("#email").val().trim(),
-                address: $("#address").val().trim(),
-                city: $("#city").val().trim(),
-                state: $("#state").val().trim(),
-                zipCode: $("#zipCode").val().trim(),
-                carrier: $("#carrier").val(),
-                shippingMethod: $("#shippingMethod").val(),
-                items: items
-            };
-
-            var total = items.reduce(function (sum, item) {
-                return sum + item.quantity * item.productPrice;
-            }, 0);
-
-            order.total = Number(total.toFixed(2));
-
-            // Show the formatted JSON document on the page.
-            $("#jsonOutput").text(JSON.stringify(order, null, 2));
-            $("#orderResult").prop("hidden", false);
-
-            // Update the AngularJS order summary.
-            var scope = angular.element(document.body).scope();
-
-            scope.$apply(function () {
-                scope.submittedOrder = order;
-            });
-
-            // REST API placeholder for later Node.js integration.
-            // Uncomment and update the endpoint when the API is available.
-            //
-            // $.ajax({
-            //     url: "/api/orders",
-            //     method: "POST",
-            //     contentType: "application/json",
-            //     data: JSON.stringify(order),
-            //     success: function (response) {
-            //         alert("Order sent successfully.");
-            //     },
-            //     error: function () {
-            //         alert("The API is not available yet.");
-            //     }
-            // });
-
-            $("#orderResult")[0].scrollIntoView({
-                behavior: "smooth"
-            });
+            $("#jsonOutput").text(orderJSON);
         });
 
-        // Load the cart when the page opens.
-        $(document).ready(function () {
-            displayCart();
-        });
+        // Show the initial cart.
+        displayCart();
     </script>
 
 </body>
