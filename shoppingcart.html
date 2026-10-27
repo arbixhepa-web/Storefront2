@@ -4,220 +4,370 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameZone - Product Management</title>
+    <title>GameZone Shopping Cart</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap: REPLACE WITH CONTRIBUTOR NAME -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+    <!-- jQuery: REPLACE WITH CONTRIBUTOR NAME -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- AngularJS: REPLACE WITH CONTRIBUTOR NAME -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        body { background: #f3f6fb; }
+        header, footer { background: #102a43; color: white; text-align: center; padding: 20px; }
+        nav { background: #243b53; padding: 12px; text-align: center; }
+        nav a { color: white; margin: 8px; text-decoration: none; }
+        .section-box { background: white; padding: 22px; margin: 22px 0; border-radius: 10px; }
+        pre { background: #172b4d; color: white; padding: 16px; white-space: pre-wrap; overflow-wrap: anywhere; }
+    </style>
 </head>
-<body>
 
-<header>
-    <div class="logo">🎮 GameZone</div>
-    <p>Your Ultimate Gaming Store</p>
-</header>
+<body ng-app="gameZoneApp" ng-controller="CartController">
 
-<nav>
-    <a href="storefront.html">Home</a>
-    <a href="storefront.html#games">Games</a>
-    <a href="storefront.html#accessories">Accessories</a>
-    <a href="storefront.html#about">About</a>
-    <a href="signup.html">Sign Up</a>
-    <a href="shoppingcart.html">Shopping Cart 🛒</a>
-    <a href="product.html">Product Management</a>
-</nav>
+    <!-- HTML structure and navigation: REPLACE WITH CONTRIBUTOR NAME -->
+    <header>
+        <h1>🎮 GameZone Shopping Cart</h1>
+        <p>Review your items and prepare your order</p>
+    </header>
 
-<main class="container my-4">
-    <h1>Product Management</h1>
-    <p>Create, search, and update GameZone products.</p>
+    <nav>
+        <a href="storefront.html">Home</a>
+        <a href="product.html">Product Management</a>
+        <a href="shoppingcart.html">Shopping Cart</a>
+        <a href="shipping.html">Shipping Selection</a>
+        <a href="signup.html">Sign Up</a>
+    </nav>
 
-    <form id="productForm">
-        <div class="mb-3">
-            <label for="productId" class="form-label">Product ID *</label>
-            <input type="text" id="productId" class="form-control" required>
-        </div>
+    <main class="container">
 
-        <div class="mb-3">
-            <label for="productDescription" class="form-label">Product Description *</label>
-            <input type="text" id="productDescription" class="form-control" required>
-        </div>
+        <!-- jQuery product search and cart: REPLACE WITH CONTRIBUTOR NAME -->
+        <section class="section-box">
+            <h2>Search Products</h2>
+            <div class="input-group mb-3">
+                <input type="text" id="productSearch" class="form-control"
+                       placeholder="Search by product name or category">
+                <button type="button" id="searchButton" class="btn btn-primary">
+                    Search
+                </button>
+            </div>
+            <p id="searchMessage"></p>
+            <div id="searchResults"></div>
 
-        <div class="mb-3">
-            <label for="productCategory" class="form-label">Product Category *</label>
-            <select id="productCategory" class="form-select" required>
-                <option value="">Choose a category</option>
-                <option value="Video Game">Video Game</option>
-                <option value="Console">Console</option>
-                <option value="Controller">Controller</option>
-                <option value="Headset">Headset</option>
-                <option value="Keyboard">Keyboard</option>
-                <option value="Accessory">Accessory</option>
-            </select>
-        </div>
+            <h3>Your Cart</h3>
+            <div id="cartItems">Loading cart...</div>
+            <button type="button" id="refreshCart" class="btn btn-secondary mt-2">
+                Refresh Cart
+            </button>
+        </section>
 
-        <div class="mb-3">
-            <label for="productUnit" class="form-label">Product Unit of Measure *</label>
-            <select id="productUnit" class="form-select" required>
-                <option value="">Choose a unit</option>
-                <option value="Each">Each</option>
-                <option value="Box">Box</option>
-                <option value="Pack">Pack</option>
-            </select>
-        </div>
+        <!-- Form validation: REPLACE WITH CONTRIBUTOR NAME -->
+        <section class="section-box">
+            <h2>Order and Shipping Details</h2>
 
-        <div class="mb-3">
-            <label for="productPrice" class="form-label">Product Price ($) *</label>
-            <input type="number" id="productPrice" class="form-control"
-                   min="0" step="0.01" required>
-        </div>
+            <form id="orderForm" novalidate>
+                <div class="mb-3">
+                    <label for="customerName" class="form-label">Full Name</label>
+                    <input id="customerName" name="customerName" class="form-control" required>
+                    <div class="invalid-feedback">Enter your name.</div>
+                </div>
 
-        <div class="mb-3">
-            <label for="productWeight" class="form-label">Product Weight (kg, optional)</label>
-            <input type="number" id="productWeight" class="form-control"
-                   min="0" step="0.01">
-        </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input id="email" name="email" type="email" class="form-control" required>
+                    <div class="invalid-feedback">Enter a valid email.</div>
+                </div>
 
-        <button type="submit" class="btn btn-primary">Submit / Update Product</button>
-        <button type="button" id="searchButton" class="btn btn-secondary">Search by ID</button>
-        <button type="button" id="clearButton" class="btn btn-outline-secondary">Clear Form</button>
-    </form>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Street Address</label>
+                    <input id="address" name="address" class="form-control" required>
+                    <div class="invalid-feedback">Enter your address.</div>
+                </div>
 
-    <hr>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="city" class="form-label">City</label>
+                        <input id="city" name="city" class="form-control" required>
+                        <div class="invalid-feedback">Enter your city.</div>
+                    </div>
 
-    <h2>Product JSON Document</h2>
-    <pre id="jsonOutput">No product submitted yet.</pre>
+                    <div class="col-md-3 mb-3">
+                        <label for="state" class="form-label">State</label>
+                        <input id="state" name="state" class="form-control"
+                               maxlength="2" required>
+                        <div class="invalid-feedback">Enter your state abbreviation.</div>
+                    </div>
 
-    <h2>Saved Products</h2>
-    <div id="productList">No products saved yet.</div>
-</main>
+                    <div class="col-md-3 mb-3">
+                        <label for="zipCode" class="form-label">ZIP Code</label>
+                        <input id="zipCode" name="zipCode" class="form-control"
+                               pattern="[0-9]{5}(-[0-9]{4})?" required>
+                        <div class="invalid-feedback">Enter a valid ZIP code.</div>
+                    </div>
+                </div>
 
-<footer>
-    <p>&copy; 2026 GameZone. All rights reserved.</p>
-</footer>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="carrier" class="form-label">Shipping Carrier</label>
+                        <select id="carrier" name="carrier" class="form-select" required>
+                            <option value="">Choose a carrier</option>
+                            <option value="FedEx">FedEx</option>
+                            <option value="UPS">UPS</option>
+                            <option value="DHL">DHL</option>
+                        </select>
+                        <div class="invalid-feedback">Choose a carrier.</div>
+                    </div>
 
-<script>
-    // Load saved products from this browser.
-    let products = JSON.parse(localStorage.getItem("gameZoneProducts")) || [];
+                    <div class="col-md-6 mb-3">
+                        <label for="shippingMethod" class="form-label">Shipping Method</label>
+                        <select id="shippingMethod" name="shippingMethod"
+                                class="form-select" required>
+                            <option value="">Choose a method</option>
+                            <option value="Overnight">Overnight</option>
+                            <option value="2nd Day">2nd Day</option>
+                            <option value="Ground">Ground</option>
+                        </select>
+                        <div class="invalid-feedback">Choose a method.</div>
+                    </div>
+                </div>
 
-    const form = document.getElementById("productForm");
-    const jsonOutput = document.getElementById("jsonOutput");
-    const productList = document.getElementById("productList");
+                <button type="submit" class="btn btn-success">
+                    Submit and Display JSON
+                </button>
+                <button type="reset" class="btn btn-secondary">Clear Form</button>
+            </form>
 
-    function saveProducts() {
-        localStorage.setItem("gameZoneProducts", JSON.stringify(products));
-    }
+            <p id="formMessage" class="mt-3" aria-live="polite"></p>
+        </section>
 
-    function showProducts() {
-        if (products.length === 0) {
-            productList.textContent = "No products saved yet.";
-            return;
+        <!-- JSON creation and display: REPLACE WITH CONTRIBUTOR NAME -->
+        <section class="section-box">
+            <h2>JSON Document</h2>
+            <p>The order JSON will appear here after a successful submission.</p>
+            <pre id="jsonOutput">Submit the form to display the JSON.</pre>
+        </section>
+
+        <!-- AngularJS display: REPLACE WITH CONTRIBUTOR NAME -->
+        <section class="section-box">
+            <h2>AngularJS Order Summary</h2>
+            <div ng-if="orderData">
+                <p><strong>Name:</strong> {{orderData.customerName}}</p>
+                <p><strong>Email:</strong> {{orderData.email}}</p>
+                <p><strong>Address:</strong>
+                    {{orderData.address}}, {{orderData.city}},
+                    {{orderData.state}} {{orderData.zipCode}}</p>
+                <p><strong>Carrier:</strong> {{orderData.carrier}}</p>
+                <p><strong>Method:</strong> {{orderData.shippingMethod}}</p>
+            </div>
+            <p ng-if="!orderData">Submit the form to see your order summary.</p>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 GameZone. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // AngularJS: REPLACE WITH CONTRIBUTOR NAME
+        var gameZoneApp = angular.module("gameZoneApp", []);
+
+        gameZoneApp.controller("CartController", function ($scope) {
+            $scope.orderData = null;
+
+            $scope.updateOrder = function (data) {
+                $scope.orderData = data;
+            };
+        });
+
+        // Read saved arrays from localStorage.
+        function readArray(key) {
+            try {
+                var value = JSON.parse(localStorage.getItem(key) || "[]");
+                return Array.isArray(value) ? value : [];
+            } catch (error) {
+                return [];
+            }
         }
 
-        productList.innerHTML = "";
+        function getProducts() {
+            return readArray("gameZoneProducts");
+        }
 
-        products.forEach(function(product) {
-            const item = document.createElement("div");
-            item.className = "border rounded p-3 mb-2";
+        function getCart() {
+            return readArray("gameZoneCart");
+        }
 
-            const details = document.createElement("p");
-            details.textContent =
-                product.productId + " - " +
-                product.productDescription + " - $" +
-                Number(product.productPrice).toFixed(2);
+        function productId(product) {
+            if (product.productId !== undefined) return product.productId;
+            if (product.id !== undefined) return product.id;
+            return product.ID;
+        }
 
-            const editButton = document.createElement("button");
-            editButton.className = "btn btn-sm btn-primary";
-            editButton.textContent = "Edit";
-            editButton.type = "button";
+        function productName(product) {
+            return product.productDescription || product.productName ||
+                   product.name || "Unnamed Product";
+        }
 
-            editButton.addEventListener("click", function() {
-                document.getElementById("productId").value = product.productId;
-                document.getElementById("productDescription").value = product.productDescription;
-                document.getElementById("productCategory").value = product.productCategory;
-                document.getElementById("productUnit").value =
-                    product.productUnit || product.productUnitOfMeasure || "Each";
-                document.getElementById("productPrice").value = product.productPrice;
-                document.getElementById("productWeight").value = product.productWeight || "";
-                jsonOutput.textContent = JSON.stringify(product, null, 2);
+        // jQuery product search: REPLACE WITH CONTRIBUTOR NAME
+        function searchProducts() {
+            var term = $("#productSearch").val().trim().toLowerCase();
+            var products = getProducts();
+            var matches = products.filter(function (product) {
+                var name = productName(product).toLowerCase();
+                var category = String(product.productCategory || product.category || "").toLowerCase();
+                return term === "" || name.includes(term) || category.includes(term);
             });
 
-            item.appendChild(details);
-            item.appendChild(editButton);
-            productList.appendChild(item);
-        });
-    }
+            $("#searchResults").empty();
 
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
+            if (products.length === 0) {
+                $("#searchMessage").text("No saved products found. Add products on Product Management first.");
+                return;
+            }
 
-        const id = document.getElementById("productId").value.trim();
-        const description = document.getElementById("productDescription").value.trim();
-        const category = document.getElementById("productCategory").value;
-        const unit = document.getElementById("productUnit").value;
-        const price = Number(document.getElementById("productPrice").value);
-        const weightText = document.getElementById("productWeight").value;
-        const weight = weightText === "" ? "" : Number(weightText);
+            if (matches.length === 0) {
+                $("#searchMessage").text("No matching products found.");
+                return;
+            }
 
-        if (price < 0 || !Number.isFinite(price)) {
-            alert("Please enter a valid product price.");
-            return;
+            $("#searchMessage").text(matches.length + " product(s) found.");
+
+            matches.forEach(function (product) {
+                var price = product.productPrice !== undefined
+                    ? " - $" + Number(product.productPrice).toFixed(2) : "";
+
+                var row = $("<p>").addClass("border rounded p-2");
+                row.text(productName(product) + price);
+                $("#searchResults").append(row);
+            });
         }
 
-        const product = {
-            productId: id,
-            productDescription: description,
-            productCategory: category,
-            productUnit: unit,
-            productUnitOfMeasure: unit,
-            productPrice: Number(price.toFixed(2)),
-            productWeight: weight
-        };
+        // jQuery cart display: REPLACE WITH CONTRIBUTOR NAME
+        function displayCart() {
+            var products = getProducts();
+            var cart = getCart();
+            var $items = $("#cartItems");
+            $items.empty();
 
-        const existingIndex = products.findIndex(function(item) {
-            return item.productId === id;
-        });
+            if (cart.length === 0) {
+                $items.text("Your cart is empty.");
+                return;
+            }
 
-        if (existingIndex >= 0) {
-            products[existingIndex] = product;
-        } else {
-            products.push(product);
+            var list = $("<ul>").addClass("list-group");
+
+            cart.forEach(function (item) {
+                var product = item;
+                if (!item.productDescription && !item.productName && !item.name) {
+                    product = products.find(function (savedProduct) {
+                        return String(productId(savedProduct)) === String(productId(item));
+                    });
+                }
+
+                var name = product ? productName(product) : "Product not found";
+                var quantity = Number(item.quantity || 1);
+                var price = product && product.productPrice !== undefined
+                    ? " | $" + Number(product.productPrice).toFixed(2) : "";
+
+                list.append(
+                    $("<li>").addClass("list-group-item")
+                        .text(name + " | Quantity: " + quantity + price)
+                );
+            });
+
+            $items.append(list);
         }
 
-        saveProducts();
-        jsonOutput.textContent = JSON.stringify(product, null, 2);
-        showProducts();
+        $("#searchButton").on("click", searchProducts);
+        $("#refreshCart").on("click", displayCart);
 
-        alert("Product saved successfully!");
-    });
-
-    document.getElementById("searchButton").addEventListener("click", function() {
-        const id = document.getElementById("productId").value.trim();
-
-        const product = products.find(function(item) {
-            return item.productId === id;
+        $("#productSearch").on("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                searchProducts();
+            }
         });
 
-        if (!product) {
-            alert("Product not found. Enter a saved Product ID.");
-            return;
+        // Form validation and JSON creation: REPLACE WITH CONTRIBUTOR NAME
+        $("#orderForm").on("submit", function (event) {
+            event.preventDefault();
+
+            var form = this;
+            if (!form.checkValidity()) {
+                form.classList.add("was-validated");
+                $("#formMessage").text("Please complete all required fields correctly.");
+                return;
+            }
+
+            var products = getProducts();
+            var cart = getCart();
+
+            var items = cart.map(function (item) {
+                var product = item;
+                if (!item.productDescription && !item.productName && !item.name) {
+                    product = products.find(function (savedProduct) {
+                        return String(productId(savedProduct)) === String(productId(item));
+                    });
+                }
+
+                return {
+                    productId: productId(item),
+                    productDescription: product ? productName(product) : "Product not found",
+                    quantity: Number(item.quantity || 1),
+                    productPrice: product && product.productPrice !== undefined
+                        ? Number(product.productPrice) : null
+                };
+            });
+
+            var order = {
+                customerName: $("#customerName").val().trim(),
+                email: $("#email").val().trim(),
+                address: $("#address").val().trim(),
+                city: $("#city").val().trim(),
+                state: $("#state").val().trim().toUpperCase(),
+                zipCode: $("#zipCode").val().trim(),
+                carrier: $("#carrier").val(),
+                shippingMethod: $("#shippingMethod").val(),
+                items: items
+            };
+
+            $("#jsonOutput").text(JSON.stringify(order, null, 2));
+            $("#formMessage").text("Form submitted successfully. JSON created.");
+
+            var scope = angular.element(document.body).scope();
+            scope.$apply(function () {
+                scope.updateOrder(order);
+            });
+
+            // AJAX call remains disabled until the NodeJS API is ready.
+            // sendOrderToAPI(order);
+        });
+
+        // AJAX REST API transport: REPLACE WITH CONTRIBUTOR NAME.
+        // Update the URL when the NodeJS REST API endpoint is provided.
+        function sendOrderToAPI(order) {
+            $.ajax({
+                url: "/api/orders",
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(order),
+                success: function () {
+                    $("#formMessage").text("Order sent to the REST API.");
+                },
+                error: function () {
+                    $("#formMessage").text("The REST API is not available yet; JSON is displayed above.");
+                }
+            });
         }
 
-        document.getElementById("productDescription").value = product.productDescription;
-        document.getElementById("productCategory").value = product.productCategory;
-        document.getElementById("productUnit").value =
-            product.productUnit || product.productUnitOfMeasure || "Each";
-        document.getElementById("productPrice").value = product.productPrice;
-        document.getElementById("productWeight").value = product.productWeight || "";
-
-        jsonOutput.textContent = JSON.stringify(product, null, 2);
-    });
-
-    document.getElementById("clearButton").addEventListener("click", function() {
-        form.reset();
-        jsonOutput.textContent = "No product selected.";
-    });
-
-    showProducts();
-</script>
-
+        $(document).ready(function () {
+            displayCart();
+        });
+    </script>
 </body>
 </html>
