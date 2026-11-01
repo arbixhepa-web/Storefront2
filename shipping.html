@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,33 +6,56 @@
 
     <title>GameZone - Shipping Selection</title>
 
-    <!-- Bootstrap library - Author: [Team Member Name] -->
+    <!--
+        Author: Team Member 1
+        Task: Bootstrap library and professional page layout
+    -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
           rel="stylesheet">
 
-    <!-- Existing GameZone CSS - Author: [Team Member Name] -->
+    <!--
+        Author: Team Member 2
+        Task: Existing GameZone website styling
+    -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- jQuery library - Author: [Team Member Name] -->
+    <!--
+        Author: Team Member 4
+        Task: jQuery library and product search functionality
+    -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <!-- AngularJS library - Author: [Team Member Name] -->
+    <!--
+        Author: Team Member 5
+        Task: AngularJS library and JSON display
+    -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 
-    <!-- Page CSS - Author: [Team Member Name] -->
+    <!--
+        Author: Team Member 2
+        Task: CSS page style and cosmetics
+    -->
     <style>
+        body {
+            background-color: #f4f6f9;
+        }
+
         .shipping-container {
             max-width: 800px;
             margin: 30px auto;
-            padding: 25px;
+            padding: 30px;
             background: #ffffff;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
         }
 
-        .shipping-container h1,
+        .shipping-container h1 {
+            margin-bottom: 10px;
+        }
+
         .shipping-container h2 {
-            margin-bottom: 20px;
+            margin-top: 25px;
+            margin-bottom: 15px;
         }
 
         #jsonOutput {
@@ -42,23 +64,41 @@
             background: #f1f5f9;
             padding: 15px;
             border-radius: 6px;
+            border: 1px solid #d1d5db;
         }
 
         .required-note {
             color: #b91c1c;
+            font-weight: bold;
+        }
+
+        #cartProducts {
+            padding-left: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
         }
     </style>
 </head>
 
 <body ng-app="gameZoneApp" ng-controller="ShippingController">
 
-    <!-- Page Header - Author: [Team Member Name] -->
+    <!--
+        Author: Team Member 1
+        Task: HTML page structure and header
+    -->
     <header>
         <div class="logo">🎮 GameZone</div>
         <p>Your Ultimate Gaming Store</p>
     </header>
 
-    <!-- Navigation - Author: [Team Member Name] -->
+    <!--
+        Author: Team Member 1
+        Task: Website navigation
+    -->
     <nav>
         <a href="storefront.html">Home</a>
         <a href="storefront.html#games">Games</a>
@@ -71,13 +111,23 @@
 
     <main class="container">
 
-        <!-- HTML Shipping Form Structure - Author: [Team Member Name] -->
+        <!--
+            Author: Team Member 1
+            Task: HTML Shipping Selection form
+        -->
         <section class="shipping-container">
+
             <h1>Shipping Selection</h1>
-            <p>Select your shipping destination, carrier, and shipping method.</p>
+
+            <p>
+                Select your shipping destination, carrier, and shipping method.
+            </p>
+
             <p class="required-note">* Required fields</p>
 
-            <form id="shippingForm" ng-submit="submitShipping($event)" novalidate>
+            <form id="shippingForm"
+                  ng-submit="submitShipping($event)"
+                  novalidate>
 
                 <h2>Shipping Destination</h2>
 
@@ -85,6 +135,7 @@
                     <label for="destination" class="form-label">
                         Street Address *
                     </label>
+
                     <input type="text"
                            id="destination"
                            class="form-control"
@@ -93,7 +144,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="city" class="form-label">City *</label>
+                    <label for="city" class="form-label">
+                        City *
+                    </label>
+
                     <input type="text"
                            id="city"
                            class="form-control"
@@ -102,7 +156,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="state" class="form-label">State *</label>
+                    <label for="state" class="form-label">
+                        State *
+                    </label>
+
                     <input type="text"
                            id="state"
                            class="form-control"
@@ -113,7 +170,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="zip" class="form-label">ZIP Code *</label>
+                    <label for="zip" class="form-label">
+                        ZIP Code *
+                    </label>
+
                     <input type="text"
                            id="zip"
                            class="form-control"
@@ -121,43 +181,58 @@
                            pattern="[0-9]{5}(-[0-9]{4})?"
                            placeholder="19114"
                            required>
-                    <small>Enter a 5-digit ZIP code or ZIP+4.</small>
+
+                    <small class="text-muted">
+                        Enter a 5-digit ZIP code or ZIP+4.
+                    </small>
                 </div>
 
                 <h2>Shipping Carrier</h2>
 
                 <div class="mb-3">
+
                     <label for="carrier" class="form-label">
                         Select Carrier *
                     </label>
+
                     <select id="carrier"
                             class="form-select"
                             ng-model="shipping.carrier"
                             required>
+
                         <option value="">Choose a carrier</option>
                         <option value="FedEx">FedEx</option>
                         <option value="UPS">UPS</option>
                         <option value="DHL">DHL</option>
+
                     </select>
                 </div>
 
                 <h2>Shipping Method</h2>
 
                 <div class="mb-3">
+
                     <label for="method" class="form-label">
                         Select Method *
                     </label>
+
                     <select id="method"
                             class="form-select"
                             ng-model="shipping.method"
                             required>
+
                         <option value="">Choose a method</option>
                         <option value="Overnight">Overnight</option>
                         <option value="2nd Day">2nd Day</option>
                         <option value="Ground">Ground</option>
+
                     </select>
                 </div>
 
+                <!--
+                    Author: Arbi Xhepa
+                    Task: JavaScript form validation
+                -->
                 <button type="submit" class="btn btn-primary">
                     Submit Shipping Details
                 </button>
@@ -172,43 +247,69 @@
 
             <hr>
 
-            <!-- AngularJS JSON Display - Author: [Team Member Name] -->
+            <!--
+                Author: Team Member 5
+                Task: AngularJS JSON document display
+            -->
             <h2>Shipping JSON Document</h2>
 
             <p ng-if="!submitted">
                 Submit the form to display your shipping details.
             </p>
 
-            <pre id="jsonOutput" ng-if="submitted">{{ shippingDocument | json:2 }}</pre>
+            <pre id="jsonOutput"
+                 ng-if="submitted">{{ shippingDocument | json:2 }}</pre>
 
             <hr>
 
-            <!-- jQuery Product Search - Author: [Team Member Name] -->
+            <!--
+                Author: Team Member 4
+                Task: jQuery product document search
+            -->
             <h2>Shopping Cart Products</h2>
-            <p id="cartMessage">Loading saved products...</p>
+
+            <p id="cartMessage">
+                Loading saved products...
+            </p>
+
             <ul id="cartProducts"></ul>
 
-            <!-- AJAX API Integration - Author: [Team Member Name] -->
+            <hr>
+
+            <!--
+                Author: Team Member 6
+                Task: AJAX preparation for future REST API
+            -->
             <h2>REST API Status</h2>
+
             <p id="apiStatus">
                 The REST API will be connected in a later assignment.
             </p>
+
         </section>
 
     </main>
 
-    <!-- Footer -->
+    <!-- Author: Team Member 1 - Footer -->
     <footer>
         <p>&copy; 2026 GameZone. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript, AngularJS, jQuery, and JSON - Author: [Team Member Name] -->
+
+    <!--
+        Author: Arbi Xhepa
+        Task: JavaScript validation and JSON document generation
+    -->
     <script>
+
         // Create the AngularJS application.
         var app = angular.module("gameZoneApp", []);
 
+
+        // AngularJS Controller
         app.controller("ShippingController", function($scope) {
 
+            // Create the shipping object.
             $scope.shipping = {
                 destination: "",
                 city: "",
@@ -218,48 +319,91 @@
                 method: ""
             };
 
+            // Track whether the form was submitted.
             $scope.submitted = false;
+
+            // Object that will hold the JSON document.
             $scope.shippingDocument = {};
 
-            // JavaScript validation and JSON generation.
+
+            // Submit the shipping form.
             $scope.submitShipping = function(event) {
+
                 event.preventDefault();
 
                 var form = document.getElementById("shippingForm");
 
-                // Check required fields and the ZIP code.
+
+                // Check that all required fields are completed.
                 if (!form.checkValidity()) {
+
                     form.reportValidity();
+
                     return;
                 }
 
-                // Make sure the state has two letters.
-                if (!/^[A-Za-z]{2}$/.test($scope.shipping.state.trim())) {
-                    alert("Enter a valid two-letter state abbreviation.");
+
+                // Validate that the state contains two letters.
+                if (!/^[A-Za-z]{2}$/.test(
+                    $scope.shipping.state.trim()
+                )) {
+
+                    alert(
+                        "Please enter a valid two-letter state abbreviation."
+                    );
+
                     return;
                 }
 
-                // Read the shipping information and build the JSON document.
+
+                // Create the JSON shipping document.
                 $scope.shippingDocument = {
+
                     shippingDestination: {
-                        address: $scope.shipping.destination.trim(),
-                        city: $scope.shipping.city.trim(),
-                        state: $scope.shipping.state.trim().toUpperCase(),
-                        zip: $scope.shipping.zip.trim()
+
+                        address:
+                            $scope.shipping.destination.trim(),
+
+                        city:
+                            $scope.shipping.city.trim(),
+
+                        state:
+                            $scope.shipping.state
+                                .trim()
+                                .toUpperCase(),
+
+                        zip:
+                            $scope.shipping.zip.trim()
                     },
-                    shippingCarrier: $scope.shipping.carrier,
-                    shippingMethod: $scope.shipping.method
+
+                    shippingCarrier:
+                        $scope.shipping.carrier,
+
+                    shippingMethod:
+                        $scope.shipping.method
                 };
 
+
+                // Display the JSON document.
                 $scope.submitted = true;
 
-                // Display the JSON document in the browser console too.
-                console.log(JSON.stringify($scope.shippingDocument, null, 2));
+
+                // Also display the JSON in the browser console.
+                console.log(
+                    JSON.stringify(
+                        $scope.shippingDocument,
+                        null,
+                        2
+                    )
+                );
             };
 
-            // Clear the shipping form and JSON display.
+
+            // Clear the form and JSON output.
             $scope.clearForm = function() {
+
                 $scope.shipping = {
+
                     destination: "",
                     city: "",
                     state: "",
@@ -268,87 +412,157 @@
                     method: ""
                 };
 
-                $scope.submitted = false;
+
                 $scope.shippingDocument = {};
+
+                $scope.submitted = false;
             };
+
         });
 
-        // jQuery: search saved product records for shopping cart items.
+
+        /*
+            Author: Team Member 4
+            Task: jQuery search of product document collection
+        */
+
         $(document).ready(function() {
 
+            // Get the saved product collection.
             var products = JSON.parse(
                 localStorage.getItem("gameZoneProducts") || "[]"
             );
 
+
+            // Get the shopping cart collection.
             var cart = JSON.parse(
                 localStorage.getItem("gameZoneCart") || "[]"
             );
 
+
             var $cartProducts = $("#cartProducts");
+
             var foundProducts = 0;
 
+
+            // Clear any existing product list.
             $cartProducts.empty();
 
+
+            // Check if the cart is empty.
             if (cart.length === 0) {
+
                 $("#cartMessage").text(
                     "Your cart is empty. Add products on the Shopping Cart page."
                 );
+
             } else {
-                $("#cartMessage").text("Products found in your cart:");
 
-                // Match each cart item to the saved product collection.
-                $.each(cart, function(index, cartItem) {
+                $("#cartMessage").text(
+                    "Products found in your cart:"
+                );
 
-                    var product = products.find(function(savedProduct) {
-                        return savedProduct.productId === cartItem.productId;
-                    });
 
-                    if (product) {
-                        var quantity = Number(cartItem.quantity) || 1;
+                // Search the product collection.
+                $.each(
+                    cart,
+                    function(index, cartItem) {
 
-                        var description =
-                            product.productDescription +
-                            " - Quantity: " + quantity;
+                        var product = products.find(
+                            function(savedProduct) {
 
-                        $("<li>").text(description).appendTo($cartProducts);
-                        foundProducts++;
+                                return savedProduct.productId ===
+                                    cartItem.productId;
+                            }
+                        );
+
+
+                        // Display matching products.
+                        if (product) {
+
+                            var quantity =
+                                Number(cartItem.quantity) || 1;
+
+
+                            var description =
+                                product.productDescription +
+                                " - Quantity: " +
+                                quantity;
+
+
+                            $("<li>")
+                                .text(description)
+                                .appendTo($cartProducts);
+
+
+                            foundProducts++;
+                        }
                     }
-                });
+                );
 
+
+                // No matching products found.
                 if (foundProducts === 0) {
+
                     $("#cartMessage").text(
-                        "No matching saved products were found. Check the product collection."
+                        "No matching saved products were found. " +
+                        "Check the product collection."
                     );
                 }
             }
+
         });
 
-        // AJAX: prepare a JSON POST request for the future REST API.
-        // Replace the example URL with the real Node.js API endpoint
-        // when it is provided in the later assignment.
+
+        /*
+            Author: Team Member 6
+            Task: AJAX preparation for future Node.js REST API
+
+            This function is prepared for the next assignment.
+            The REST API endpoint is not available yet, so this
+            function is intentionally not called at this time.
+        */
+
         function sendShippingToAPI(shippingDocument) {
 
-            $("#apiStatus").text("Sending shipping details...");
+            $("#apiStatus").text(
+                "Sending shipping details..."
+            );
+
 
             $.ajax({
+
                 url: "/api/shipping",
+
                 type: "POST",
+
                 contentType: "application/json",
-                data: JSON.stringify(shippingDocument),
+
+                data: JSON.stringify(
+                    shippingDocument
+                ),
+
 
                 success: function(response) {
+
                     $("#apiStatus").text(
                         "Shipping details were sent successfully."
                     );
                 },
 
+
                 error: function() {
+
                     $("#apiStatus").text(
-                        "API not connected yet. This is expected until the Node.js REST API is available."
+                        "API not connected yet. This is expected " +
+                        "until the Node.js REST API is available."
                     );
                 }
+
             });
+
         }
+
     </script>
 
 </body>
