@@ -1,336 +1,271 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GameZone - Shipping Selection</title>
-<!-- Author: Team Member 3 - Bootstrap Library -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet">
-<!-- Existing GameZone CSS -->
-<link rel="stylesheet" href="style.css">
-<!-- Author: Team Member 4 - jQuery Library -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<!-- Author: Team Member 5 - AngularJS Library -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-<!-- Author: Team Member 2 - CSS Page Style and Cosmetics -->
-<style>
-    /* Page background */
-    body {
-        background-color: #f4f6f9 !important;
-    }
-    /* Main shipping form container */
-    .shipping-container {
-        max-width: 800px;
-        margin: 30px auto !important;
-        padding: 30px !important;
-        background: #ffffff !important;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
-    }
-    /* Main page heading */
-    .shipping-container h1 {
-        display: block !important;
-        margin: 0 0 10px 0 !important;
-        padding: 0 !important;
-        color: #212529 !important;
-    }
-    /* Section headings */
-    .shipping-container h2 {
-        display: block !important;
-        margin: 25px 0 15px 0 !important;
-        padding: 0 !important;
-        color: #212529 !important;
-        font-size: 1.5rem !important;
-    }
-    /* Fix labels and prevent existing CSS from hiding them */
-    .shipping-container label,
-    .shipping-container .form-label {
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        position: static !important;
-        height: auto !important;
-        width: auto !important;
-        margin: 0 0 8px 0 !important;
-        padding: 0 !important;
-        color: #212529 !important;
-        font-weight: 600 !important;
-        font-size: 1rem !important;
-    }
-    /* Fix excessive spacing between fields */
-    .shipping-container .mb-3 {
-        display: block !important;
-        margin: 0 0 20px 0 !important;
-        padding: 0 !important;
-        min-height: 0 !important;
-    }
-    /* Input and dropdown styling */
-    .shipping-container input,
-    .shipping-container select {
-        display: block !important;
-        width: 100% !important;
-        height: auto !important;
-        min-height: 42px !important;
-        margin: 0 !important;
-        padding: 10px 12px !important;
-        box-sizing: border-box !important;
-    }
-    /* Helper text */
-    .shipping-container small {
-        display: block !important;
-        margin-top: 5px !important;
-    }
-    /* Required fields message */
-    .required-note {
-        display: block !important;
-        margin: 10px 0 20px 0 !important;
-        color: #b91c1c !important;
-        font-weight: bold;
-    }
-    /* JSON output */
-    #jsonOutput {
-        display: block !important;
-        white-space: pre-wrap;
-        overflow-wrap: anywhere;
-        background: #f1f5f9;
-        padding: 15px !important;
-        border: 1px solid #d1d5db;
-        border-radius: 6px;
-        color: #212529;
-    }
-    /* Buttons */
-    .shipping-container .btn {
-        margin: 5px 5px 5px 0 !important;
-    }
-    /* Shopping cart */
-    #cartProducts {
-        padding-left: 20px !important;
-    }
-    /* Footer */
-    footer {
-        text-align: center;
-        padding: 20px;
-        margin-top: 30px;
-    }
-    /* Mobile layout */
-    @media (max-width: 576px) {
+
+    <title>GameZone - Shipping Selection</title>
+
+    <!-- Author: Team Member 3 - Bootstrap Library -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Author: Team Member 4 - jQuery Library -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Author: Team Member 5 - AngularJS Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <!-- Existing GameZone stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Author: Team Member 2 - CSS Page Style and Cosmetics -->
+    <style>
+        body {
+            background-color: #f4f6f9;
+        }
+
         .shipping-container {
-            margin: 15px 10px !important;
-            padding: 20px !important;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
         }
+
         .shipping-container h1 {
-            font-size: 1.8rem !important;
+            color: #212529;
+            margin-bottom: 10px;
         }
+
         .shipping-container h2 {
-            font-size: 1.3rem !important;
+            color: #212529;
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
         }
-        .shipping-container .btn {
+
+        .shipping-container label {
+            display: block;
+            color: #212529;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .shipping-container .mb-3 {
+            margin-bottom: 18px !important;
+        }
+
+        .shipping-container input,
+        .shipping-container select {
             width: 100%;
-            margin: 5px 0 !important;
+            min-height: 42px;
         }
-    }
-</style>
+
+        .required-note {
+            color: #b91c1c;
+            font-weight: bold;
+        }
+
+        #jsonOutput {
+            display: block;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            background: #f1f5f9;
+            padding: 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            color: #212529;
+        }
+
+        .shipping-container .btn {
+            margin: 5px 5px 5px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 576px) {
+            .shipping-container {
+                margin: 15px 10px;
+                padding: 20px;
+            }
+
+            .shipping-container h1 {
+                font-size: 1.8rem;
+            }
+
+            .shipping-container .btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
 </head>
-<body ng-app="gameZoneApp" ng-controller="ShippingController">
+
 <!-- Author: Team Member 1 - HTML Page Structure -->
-<header>
-    <div class="logo">🎮 GameZone</div>
-    <p>Your Ultimate Gaming Store</p>
-</header>
-<!-- Author: Team Member 1 - Website Navigation -->
-<nav>
-    <a href="storefront.html">Home</a>
-    <a href="storefront.html#games">Games</a>
-    <a href="storefront.html#accessories">Accessories</a>
-    <a href="signup.html">Sign Up</a>
-    <a href="shoppingcart.html">Shopping Cart 🛒</a>
-    <a href="shipping.html">Shipping Selection</a>
-    <a href="product.html">Product Management</a>
-</nav>
-<main class="container">
-    <!-- Author: Team Member 1 - HTML Shipping Selection Form -->
-    <section class="shipping-container">
-        <h1>Shipping Selection</h1>
-        <p>Select your shipping destination, carrier, and shipping method.</p>
-        <p class="required-note">* Required fields</p>
-        <form id="shippingForm"
-              ng-submit="submitShipping($event)"
-              novalidate>
-            <h2>Shipping Destination</h2>
-            <div class="mb-3">
-                <label for="destination" class="form-label">
-                    Street Address *
-                </label>
-                <input type="text"
-                       id="destination"
-                       class="form-control"
-                       ng-model="shipping.destination"
-                       required>
-            </div>
-            <div class="mb-3">
-                <label for="city" class="form-label">
-                    City *
-                </label>
-                <input type="text"
-                       id="city"
-                       class="form-control"
-                       ng-model="shipping.city"
-                       required>
-            </div>
-            <div class="mb-3">
-                <label for="state" class="form-label">
-                    State *
-                </label>
-                <input type="text"
-                       id="state"
-                       class="form-control"
-                       ng-model="shipping.state"
-                       maxlength="2"
-                       placeholder="PA"
-                       required>
-            </div>
-            <div class="mb-3">
-                <label for="zip" class="form-label">
-                    ZIP Code *
-                </label>
-                <input type="text"
-                       id="zip"
-                       class="form-control"
-                       ng-model="shipping.zip"
-                       pattern="[0-9]{5}(-[0-9]{4})?"
-                       placeholder="19114"
-                       required>
-                <small class="text-muted">
-                    Enter a 5-digit ZIP code or ZIP+4.
-                </small>
-            </div>
-            <h2>Shipping Carrier</h2>
-            <div class="mb-3">
-                <label for="carrier" class="form-label">
-                    Select Carrier *
-                </label>
-                <select id="carrier"
-                        class="form-select"
-                        ng-model="shipping.carrier"
-                        required>
-                    <option value="">Choose a carrier</option>
-                    <option value="FedEx">FedEx</option>
-                    <option value="UPS">UPS</option>
-                    <option value="DHL">DHL</option>
-                </select>
-            </div>
-            <h2>Shipping Method</h2>
-            <div class="mb-3">
-                <label for="method" class="form-label">
-                    Select Method *
-                </label>
-                <select id="method"
-                        class="form-select"
-                        ng-model="shipping.method"
-                        required>
-                    <option value="">Choose a method</option>
-                    <option value="Overnight">Overnight</option>
-                    <option value="2nd Day">2nd Day</option>
-                    <option value="Ground">Ground</option>
-                </select>
-            </div>
-            <!-- Author: Arbi Xhepa - JavaScript Form Validation -->
-            <button type="submit" class="btn btn-primary">
-                Submit Shipping Details
-            </button>
-            <button type="button"
-                    class="btn btn-secondary"
-                    ng-click="clearForm()">
-                Clear Form
-            </button>
-        </form>
-        <hr>
-        <!-- Author: Team Member 5 - AngularJS JSON Display -->
-        <h2>Shipping JSON Document</h2>
-        <p ng-if="!submitted">
-            Submit the form to display your shipping details.
-        </p>
-        <pre id="jsonOutput"
-             ng-if="submitted">{{ shippingDocument | json:2 }}</pre>
-        <hr>
-        <!-- Author: Team Member 4 - jQuery Product Search -->
-        <h2>Shopping Cart Products</h2>
-        <p id="cartMessage">Loading saved products...</p>
-        <ul id="cartProducts"></ul>
-        <hr>
-        <!-- Author: Team Member 6 - AJAX Preparation -->
-        <h2>REST API Status</h2>
-        <p id="apiStatus">
-            The REST API will be connected in a later assignment.
-        </p>
-    </section>
-</main>
-<!-- Author: Team Member 1 - Footer -->
-<footer>
-    <p>&copy; 2026 GameZone. All rights reserved.</p>
-</footer>
-<!-- Author: Arbi Xhepa - JavaScript, AngularJS, and JSON -->
-<script>
-    // Create the AngularJS application.
-    var app = angular.module("gameZoneApp", []);
-    // Create the Shipping Controller.
-    app.controller("ShippingController", function($scope) {
-        // Shipping form data.
-        $scope.shipping = {
-            destination: "",
-            city: "",
-            state: "",
-            zip: "",
-            carrier: "",
-            method: ""
-        };
-        // Track form submission.
-        $scope.submitted = false;
-        // Store the completed JSON document.
-        $scope.shippingDocument = {};
-        // Validate the form and generate the JSON document.
-        $scope.submitShipping = function(event) {
-            event.preventDefault();
-            var form = document.getElementById("shippingForm");
-            // Check all required fields.
-            if (!form.checkValidity()) {
-                form.reportValidity();
-                return;
-            }
-            // Validate the two-letter state abbreviation.
-            if (!/^[A-Za-z]{2}$/.test(
-                $scope.shipping.state.trim()
-            )) {
-                alert(
-                    "Please enter a valid two-letter state abbreviation."
-                );
-                return;
-            }
-            // Create the shipping JSON document.
-            $scope.shippingDocument = {
-                shippingDestination: {
-                    address: $scope.shipping.destination.trim(),
-                    city: $scope.shipping.city.trim(),
-                    state: $scope.shipping.state.trim().toUpperCase(),
-                    zip: $scope.shipping.zip.trim()
-                },
-                shippingCarrier: $scope.shipping.carrier,
-                shippingMethod: $scope.shipping.method
-            };
-            // Display the JSON document.
-            $scope.submitted = true;
-            // Also display JSON in the browser console.
-            console.log(
-                JSON.stringify(
-                    $scope.shippingDocument,
-                    null,
-                    2
-                )
-            );
-        };
-        // Clear the form and JSON output.
-        $scope.clearForm = function() {
+<body ng-app="gameZoneApp" ng-controller="ShippingController">
+
+    <header>
+        <div class="logo">🎮 GameZone</div>
+        <p>Your Ultimate Gaming Store</p>
+    </header>
+
+    <!-- Author: Team Member 1 - Website Navigation -->
+    <nav>
+        <a href="storefront.html">Home</a>
+        <a href="storefront.html#games">Games</a>
+        <a href="storefront.html#accessories">Accessories</a>
+        <a href="signup.html">Sign Up</a>
+        <a href="shoppingcart.html">Shopping Cart 🛒</a>
+        <a href="shipping.html">Shipping Selection</a>
+        <a href="product.html">Product Management</a>
+    </nav>
+
+    <main class="container">
+        <!-- Author: Team Member 1 - HTML Shipping Selection Form -->
+        <section class="shipping-container">
+
+            <h1>Shipping Selection</h1>
+
+            <p>
+                Select your shipping destination, carrier, and shipping method.
+            </p>
+
+            <p class="required-note">* Required fields</p>
+
+            <form id="shippingForm"
+                  ng-submit="submitShipping($event)"
+                  novalidate>
+
+                <h2>Shipping Destination</h2>
+
+                <div class="mb-3">
+                    <label for="destination">Street Address *</label>
+                    <input type="text"
+                           id="destination"
+                           class="form-control"
+                           ng-model="shipping.destination"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="city">City *</label>
+                    <input type="text"
+                           id="city"
+                           class="form-control"
+                           ng-model="shipping.city"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="state">State *</label>
+                    <input type="text"
+                           id="state"
+                           class="form-control"
+                           ng-model="shipping.state"
+                           maxlength="2"
+                           placeholder="PA"
+                           required>
+                    <small class="text-muted">
+                        Enter a two-letter state abbreviation.
+                    </small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="zip">ZIP Code *</label>
+                    <input type="text"
+                           id="zip"
+                           class="form-control"
+                           ng-model="shipping.zip"
+                           pattern="[0-9]{5}(-[0-9]{4})?"
+                           placeholder="19114"
+                           required>
+                    <small class="text-muted">
+                        Enter a 5-digit ZIP code or ZIP+4.
+                    </small>
+                </div>
+
+                <h2>Shipping Carrier</h2>
+
+                <div class="mb-3">
+                    <label for="carrier">Select Carrier *</label>
+                    <select id="carrier"
+                            class="form-select"
+                            ng-model="shipping.carrier"
+                            required>
+                        <option value="">Choose a carrier</option>
+                        <option value="FedEx">FedEx</option>
+                        <option value="UPS">UPS</option>
+                        <option value="DHL">DHL</option>
+                    </select>
+                </div>
+
+                <h2>Shipping Method</h2>
+
+                <div class="mb-3">
+                    <label for="method">Select Method *</label>
+                    <select id="method"
+                            class="form-select"
+                            ng-model="shipping.method"
+                            required>
+                        <option value="">Choose a method</option>
+                        <option value="Overnight">Overnight</option>
+                        <option value="2nd Day">2nd Day</option>
+                        <option value="Ground">Ground</option>
+                    </select>
+                </div>
+
+                <!-- Author: Arbi Xhepa - JavaScript Form Validation -->
+                <button type="submit" class="btn btn-primary">
+                    Submit Shipping Details
+                </button>
+
+                <button type="button"
+                        class="btn btn-secondary"
+                        ng-click="clearForm()">
+                    Clear Form
+                </button>
+            </form>
+
+            <hr>
+
+            <!-- Author: Team Member 5 - AngularJS JSON Display -->
+            <h2>Shipping JSON Document</h2>
+
+            <p ng-if="!submitted">
+                Submit the form to display your shipping details.
+            </p>
+
+            <pre id="jsonOutput"
+                 ng-if="submitted">{{ shippingDocument | json:2 }}</pre>
+
+            <a href="shoppingcart.html"
+               class="btn btn-primary mt-3">
+                Continue to Shopping Cart
+            </a>
+
+        </section>
+    </main>
+
+    <!-- Author: Team Member 1 - Footer -->
+    <footer>
+        <p>&copy; 2026 GameZone. All rights reserved.</p>
+    </footer>
+
+    <!-- Author: Arbi Xhepa - JavaScript, AngularJS, and JSON -->
+    <script>
+        // Create the AngularJS application.
+        var app = angular.module("gameZoneApp", []);
+
+        // Create the Shipping Controller.
+        app.controller("ShippingController", function($scope) {
+
+            // Shipping form data.
             $scope.shipping = {
                 destination: "",
                 city: "",
@@ -339,87 +274,96 @@
                 carrier: "",
                 method: ""
             };
-            $scope.shippingDocument = {};
+
             $scope.submitted = false;
-        };
-    });
-    /*
-        Author: Team Member 4
-        Task: jQuery search of the product document collection
-    */
-    $(document).ready(function() {
-        var products = JSON.parse(
-            localStorage.getItem("gameZoneProducts") || "[]"
-        );
-        var cart = JSON.parse(
-            localStorage.getItem("gameZoneCart") || "[]"
-        );
-        var $cartProducts = $("#cartProducts");
-        var foundProducts = 0;
-        $cartProducts.empty();
-        if (cart.length === 0) {
-            $("#cartMessage").text(
-                "Your cart is empty. Add products on the Shopping Cart page."
-            );
-        } else {
-            $("#cartMessage").text(
-                "Products found in your cart:"
-            );
-            // Search the saved product collection for cart items.
-            $.each(cart, function(index, cartItem) {
-                var product = products.find(function(savedProduct) {
-                    return savedProduct.productId ===
-                           cartItem.productId;
-                });
-                if (product) {
-                    var quantity =
-                        Number(cartItem.quantity) || 1;
-                    var description =
-                        product.productDescription +
-                        " - Quantity: " +
-                        quantity;
-                    $("<li>")
-                        .text(description)
-                        .appendTo($cartProducts);
-                    foundProducts++;
+            $scope.shippingDocument = {};
+
+            // Validate the form and generate the JSON document.
+            $scope.submitShipping = function(event) {
+
+                event.preventDefault();
+
+                var form = document.getElementById("shippingForm");
+
+                // Check required fields and ZIP format.
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
                 }
-            });
-            if (foundProducts === 0) {
-                $("#cartMessage").text(
-                    "No matching saved products were found. " +
-                    "Check the product collection."
+
+                // Prevent inputs containing only spaces.
+                var fields = [
+                    $scope.shipping.destination,
+                    $scope.shipping.city,
+                    $scope.shipping.state,
+                    $scope.shipping.zip,
+                    $scope.shipping.carrier,
+                    $scope.shipping.method
+                ];
+
+                var hasEmptyField = fields.some(function(value) {
+                    return !value || !value.trim();
+                });
+
+                if (hasEmptyField) {
+                    alert("Please complete all required fields.");
+                    return;
+                }
+
+                // Validate the two-letter state abbreviation.
+                if (!/^[A-Za-z]{2}$/.test(
+                    $scope.shipping.state.trim()
+                )) {
+                    alert("Please enter a valid two-letter state abbreviation.");
+                    return;
+                }
+
+                // Create the shipping JSON document.
+                $scope.shippingDocument = {
+                    shippingDestination: {
+                        address: $scope.shipping.destination.trim(),
+                        city: $scope.shipping.city.trim(),
+                        state: $scope.shipping.state.trim().toUpperCase(),
+                        zip: $scope.shipping.zip.trim()
+                    },
+                    shippingCarrier: $scope.shipping.carrier,
+                    shippingMethod: $scope.shipping.method
+                };
+
+                // Save shipping details for the Shopping Cart page.
+                localStorage.setItem(
+                    "gameZoneShipping",
+                    JSON.stringify($scope.shippingDocument)
                 );
-            }
-        }
-    });
-    /*
-        Author: Team Member 6
-        Task: AJAX preparation for the future Node.js REST API.
-        The REST API is not available yet, so this function
-        is prepared for a later assignment.
-    */
-    function sendShippingToAPI(shippingDocument) {
-        $("#apiStatus").text(
-            "Sending shipping details..."
-        );
-        $.ajax({
-            url: "/api/shipping",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify(shippingDocument),
-            success: function() {
-                $("#apiStatus").text(
-                    "Shipping details were sent successfully."
+
+                // Display the JSON document.
+                $scope.submitted = true;
+
+                console.log(
+                    JSON.stringify($scope.shippingDocument, null, 2)
                 );
-            },
-            error: function() {
-                $("#apiStatus").text(
-                    "API not connected yet. This is expected until " +
-                    "the Node.js REST API is available."
-                );
-            }
+            };
+
+            // Clear the form and saved shipping information.
+            $scope.clearForm = function() {
+
+                $scope.shipping = {
+                    destination: "",
+                    city: "",
+                    state: "",
+                    zip: "",
+                    carrier: "",
+                    method: ""
+                };
+
+                $scope.shippingDocument = {};
+                $scope.submitted = false;
+
+                localStorage.removeItem("gameZoneShipping");
+            };
+
         });
-    }
-</script>
+    </script>
+
 </body>
 </html>
