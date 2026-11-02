@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app="billingApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GameZone - Billing Details</title>
+
+    <!-- Author: Team Member 3 - Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Author: Team Member 4 - jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Author: Team Member 8 - AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Author: Team Member 2 - CSS Styling -->
+    <style>
+        body {
+            background: #f4f6f9;
+        }
+
+        .page-container {
+            max-width: 850px;
+            margin: 30px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,.12);
+        }
+
+        .page-container h1,
+        .page-container h2 {
+            color: #212529;
+        }
+
+        .page-container h2 {
+            font-size: 1.35rem;
+            margin: 25px 0 15px;
+        }
+
+        .page-container label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        .page-container .mb-3 {
+            margin-bottom: 18px !important;
+        }
+
+        #billingJSON {
+            background: #101b35;
+            color: #a9f5bd;
+            padding: 18px;
+            border-radius: 8px;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media(max-width: 576px) {
+            .page-container {
+                margin: 15px 10px;
+                padding: 20px;
+            }
+
+            .page-container .btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+
+<body ng-controller="BillingController">
+
+    <!-- Author: Team Member 1 - HTML Structure -->
+    <header>
+        <div class="logo">🎮 GameZone</div>
+        <p>Your Ultimate Gaming Store</p>
+    </header>
+
+    <!-- Author: Team Member 1 - Navigation -->
+    <nav>
+        <a href="storefront.html">Home</a>
+        <a href="storefront.html#games">Games</a>
+        <a href="storefront.html#accessories">Accessories</a>
+        <a href="signup.html">Sign Up</a>
+        <a href="product.html">Product Management</a>
+        <a href="shoppingcart.html">Shopping Cart 🛒</a>
+        <a href="shipping.html">Shipping Selection</a>
+        <a href="billings.html">Billing Details</a>
+        <a href="returns.html">Handle Returns</a>
+    </nav>
+
+    <main class="container">
+        <section class="page-container">
+
+            <h1>Billing Details</h1>
+            <p>Enter your billing information to complete your order.</p>
+            <p class="text-danger">* Required fields</p>
+
+            <!-- Author: Team Member 1 - Billing Form -->
+            <form id="billingForm"
+                  ng-submit="submitBilling($event)"
+                  novalidate>
+
+                <h2>Customer Information</h2>
+
+                <div class="mb-3">
+                    <label for="customerName">Full Name *</label>
+                    <input id="customerName"
+                           class="form-control"
+                           type="text"
+                           ng-model="billing.customerName"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email">Email Address *</label>
+                    <input id="email"
+                           class="form-control"
+                           type="email"
+                           ng-model="billing.email"
+                           required>
+                </div>
+
+                <h2>Billing Address</h2>
+
+                <div class="mb-3">
+                    <label for="address">Street Address *</label>
+                    <input id="address"
+                           class="form-control"
+                           type="text"
+                           ng-model="billing.address"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="city">City *</label>
+                    <input id="city"
+                           class="form-control"
+                           type="text"
+                           ng-model="billing.city"
+                           required>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="state">State *</label>
+                        <input id="state"
+                               class="form-control"
+                               type="text"
+                               maxlength="2"
+                               placeholder="PA"
+                               ng-model="billing.state"
+                               required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="zip">ZIP Code *</label>
+                        <input id="zip"
+                               class="form-control"
+                               type="text"
+                               pattern="[0-9]{5}(-[0-9]{4})?"
+                               placeholder="19114"
+                               ng-model="billing.zip"
+                               required>
+                    </div>
+                </div>
+
+                <h2>Payment Information</h2>
+
+                <div class="mb-3">
+                    <label for="paymentMethod">Payment Method *</label>
+                    <select id="paymentMethod"
+                            class="form-select"
+                            ng-model="billing.paymentMethod"
+                            required>
+                        <option value="">Choose a payment method</option>
+                        <option value="Visa">Visa</option>
+                        <option value="Mastercard">Mastercard</option>
+                        <option value="American Express">American Express</option>
+                        <option value="PayPal">PayPal</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="cardholder">Cardholder Name *</label>
+                    <input id="cardholder"
+                           class="form-control"
+                           type="text"
+                           ng-model="billing.cardholder"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="lastFour">Last Four Digits (if applicable)</label>
+                    <input id="lastFour"
+                           class="form-control"
+                           type="text"
+                           inputmode="numeric"
+                           maxlength="4"
+                           pattern="[0-9]{4}"
+                           placeholder="1234"
+                           ng-model="billing.lastFour">
+                    <small class="text-muted">
+                        Do not enter your complete card number or security code.
+                        PayPal users may leave this blank.
+                    </small>
+                </div>
+
+                <!-- Author: Team Member 4 - JavaScript Validation -->
+                <button type="submit" class="btn btn-primary">
+                    Submit Billing Details
+                </button>
+
+                <button type="button"
+                        class="btn btn-secondary"
+                        ng-click="clearBilling()">
+                    Clear Form
+                </button>
+            </form>
+
+            <hr>
+
+            <!-- Author: Team Member 5 - Billing JSON Document -->
+            <h2>Billing JSON Document</h2>
+
+            <p ng-if="!submitted">
+                Your billing JSON will appear here after submission.
+            </p>
+
+            <pre id="billingJSON"
+                 ng-if="submitted">{{ billingDocument | json:2 }}</pre>
+
+            <p id="apiMessage" class="mt-3">{{ apiMessage }}</p>
+
+            <a href="returns.html" class="btn btn-outline-primary">
+                Go to Handle Returns
+            </a>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 GameZone. All rights reserved.</p>
+    </footer>
+
+    <!-- Author: Team Member 8 - AngularJS REST Service -->
+    <script>
+        var app = angular.module("billingApp", []);
+
+        app.controller("BillingController", function($scope, $http) {
+
+            // Change this URL if your team has a different assigned port.
+            var API_BASE = "http://ist256.up.ist.psu.edu:3002";
+
+            $scope.billing = {
+                customerName: "",
+                email: "",
+                address: "",
+                city: "",
+                state: "",
+                zip: "",
+                paymentMethod: "",
+                cardholder: "",
+                lastFour: ""
+            };
+
+            $scope.submitted = false;
+            $scope.billingDocument = {};
+            $scope.apiMessage = "";
+
+            $scope.submitBilling = function(event) {
+
+                event.preventDefault();
+
+                var form = document.getElementById("billingForm");
+
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+
+                var values = [
+                    $scope.billing.customerName,
+                    $scope.billing.email,
+                    $scope.billing.address,
+                    $scope.billing.city,
+                    $scope.billing.state,
+                    $scope.billing.zip,
+                    $scope.billing.paymentMethod,
+                    $scope.billing.cardholder
+                ];
+
+                if (values.some(function(value) {
+                    return !value || !value.trim();
+                })) {
+                    alert("Please complete all required fields.");
+                    return;
+                }
+
+                if (!/^[A-Za-z]{2}$/.test($scope.billing.state.trim())) {
+                    alert("Enter a valid two-letter state abbreviation.");
+                    return;
+                }
+
+                if ($scope.billing.lastFour &&
+                    !/^[0-9]{4}$/.test($scope.billing.lastFour)) {
+                    alert("Enter exactly four digits or leave the field blank.");
+                    return;
+                }
+
+                $scope.billingDocument = {
+                    shopper: {
+                        customerName: $scope.billing.customerName.trim(),
+                        email: $scope.billing.email.trim()
+                    },
+                    billing: {
+                        address: $scope.billing.address.trim(),
+                        city: $scope.billing.city.trim(),
+                        state: $scope.billing.state.trim().toUpperCase(),
+                        zip: $scope.billing.zip.trim()
+                    },
+                    payment: {
+                        paymentMethod: $scope.billing.paymentMethod,
+                        cardholder: $scope.billing.cardholder.trim(),
+                        lastFour: $scope.billing.lastFour || ""
+                    }
+                };
+
+                localStorage.setItem(
+                    "gameZoneBilling",
+                    JSON.stringify($scope.billingDocument)
+                );
+
+                $scope.submitted = true;
+
+                // Send the billing JSON to the Node.js REST service.
+                $scope.apiMessage = "Attempting to connect to the REST API...";
+
+                $http.post(
+                    API_BASE + "/billing",
+                    $scope.billingDocument
+                ).then(function(response) {
+                    $scope.apiMessage = "Billing JSON sent to the server successfully.";
+                }).catch(function(error) {
+                    $scope.apiMessage =
+                        "Billing JSON created locally. Server connection is not available yet.";
+                });
+            };
+
+            $scope.clearBilling = function() {
+
+                $scope.billing = {
+                    customerName: "",
+                    email: "",
+                    address: "",
+                    city: "",
+                    state: "",
+                    zip: "",
+                    paymentMethod: "",
+                    cardholder: "",
+                    lastFour: ""
+                };
+
+                $scope.billingDocument = {};
+                $scope.submitted = false;
+                $scope.apiMessage = "";
+
+                localStorage.removeItem("gameZoneBilling");
+            };
+        });
+    </script>
+
+</body>
+</html>
